@@ -22,8 +22,14 @@ await build({
 cpSync(resolve(root, "spec"), resolve(stage, "spec"), { recursive: true });
 cpSync(resolve(root, "manifest.json"), resolve(stage, "manifest.json"));
 
-// Zip the staged folder into an .mcpb (a zip archive by spec).
+// Pack the staged folder into an .mcpb using the official MCPB CLI.
+// The official packer produces the archive layout Claude Desktop expects
+// (files at their paths, no bare directory entries) and validates the
+// manifest — a hand-rolled `zip -r` adds `dist/`/`spec/` directory entries
+// that Claude Desktop's loader rejects.
 const mcpbPath = resolve(root, "rb209-mcp.mcpb");
 rmSync(mcpbPath, { force: true });
-execSync(`cd "${stage}" && zip -r "${mcpbPath}" .`, { stdio: "inherit" });
+execSync(`npx --yes @anthropic-ai/mcpb@2 pack "${stage}" "${mcpbPath}"`, {
+  stdio: "inherit",
+});
 console.error("built rb209-mcp.mcpb");

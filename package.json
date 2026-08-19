@@ -2,8 +2,12 @@
   "name": "rb209-mcp",
   "version": "0.1.0",
   "type": "module",
-  "bin": { "rb209-mcp": "dist/index.js" },
-  "engines": { "node": ">=20" },
+  "bin": {
+    "rb209-mcp": "dist/index.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
@@ -14,11 +18,12 @@
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.5.0",
-    "vitest": "^2.0.0",
+    "@anthropic-ai/mcpb": "^2.1.2",
+    "@types/node": "^20.0.0",
+    "esbuild": "^0.23.0",
     "msw": "^2.4.0",
     "tsx": "^4.0.0",
-    "esbuild": "^0.23.0",
-    "@types/node": "^20.0.0"
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
   }
 }
