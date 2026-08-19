@@ -20,10 +20,11 @@ integer IDs the `DataInput` needs.
 2. **Resolve every ID from a lookup tool.** IDs like `cropTypeId`, `soilTypeId`,
    `swardTypeId` are API-specific integers. Look them up; never hard-code them
    from memory. Show the user the options when a choice is theirs to make.
-3. **Copy the shape of a known-good request.** `test/fixtures/RecommendationsSampleInput.json`
-   in this repo is a real, accepted `DataInput` (winter barley, England &
-   Wales). Mirror its structure and only swap in the values you gathered. A
-   matching real response is at `test/fixtures/RecommendationsSample.json`.
+3. **Copy the shape of a known-good request.** This repo has two real, accepted
+   `DataInput`/response pairs — mirror the one matching your field type and only
+   swap in the values you gathered:
+   - **Arable:** `test/fixtures/RecommendationsSampleInput.json` (+ `…Sample.json`) — winter barley, England & Wales.
+   - **Grass:** `test/fixtures/RecommendationsGrassInput.json` (+ `…GrassSample.json`) — first-cut silage plus grazing, England & Wales.
 4. **If the API returns a validation error, read it — the field is named.**
    The error tells you exactly what to fix. See *Troubleshooting* for the
    common ones and their fixes.
@@ -202,10 +203,11 @@ Mirror `test/fixtures/RecommendationsSampleInput.json`. The top level is:
 }
 ```
 
-### Grass field skeleton (from the AHDB worked example)
+### Grass field skeleton (verified — first-cut silage + grazing, England & Wales)
 
-Set `fieldType` to the grass type, `arable: []`, and populate `grass`
-(add `"grassland": {}` for the current build):
+Verified end-to-end against the live API; full payload at
+`test/fixtures/RecommendationsGrassInput.json`. Set `fieldType` to the grass
+type, `arable: []`, include `"grassland": {}`, and populate `grass`:
 
 ```json
 "grass": {
@@ -213,6 +215,10 @@ Set `fieldType` to the grass type, `arable: []`, and populate `grass`
   "defoliationSequenceId": 16, "grassGrowthClassId": 3, "yield": 11, "seasonId": 1
 }
 ```
+
+For grass, N comes back **per defoliation** (one "Total" row per cut/grazing in
+`calculations[]`, keyed by `defoliationId`) — sum them for the season's total N
+(the fixture's grazing example totals 250 kg N/ha across four defoliations).
 
 ### Organic materials (optional) — add to `field.organicMaterials` and set `mannerManures` accordingly
 
@@ -286,9 +292,11 @@ splits, any "new soil analysis needed" flags).
 
 ## Reference
 
-- **Known-good request/response:** `test/fixtures/RecommendationsSampleInput.json`
-  and `test/fixtures/RecommendationsSample.json` in this repo — the verified
-  source of truth for the payload shape.
+- **Known-good request/response pairs** (the verified source of truth for the
+  payload shape): arable — `test/fixtures/RecommendationsSampleInput.json` /
+  `RecommendationsSample.json`; grass —
+  `test/fixtures/RecommendationsGrassInput.json` / `RecommendationsGrassSample.json`.
+  Both were captured from live API 200 responses.
 - **AHDB worked examples** (Arable, Grass, Organic Materials, MANNER Outputs,
   Lab Analysis, Measurement): <https://rb209.ahdb.org.uk/Home/WorkedExamples>.
   When copying one, add `"grassland": {}` for the current API build.
