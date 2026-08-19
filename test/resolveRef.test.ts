@@ -18,9 +18,25 @@ describe("inlineSchema", () => {
     expect(JSON.stringify(s)).not.toContain("$ref");
   });
 
-  it("does not infinitely recurse on cyclic definitions", () => {
-    // Should return without throwing even if a definition references itself.
-    const ref = { $ref: "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.DataInput" };
-    expect(() => inlineSchema(doc, ref)).not.toThrow();
+  it("stubs a genuine circular definition instead of recursing forever", () => {
+    const cyclicDoc = {
+      swagger: "2.0",
+      paths: {},
+      definitions: {
+        Node: {
+          type: "object",
+          properties: {
+            value: { type: "string" },
+            next: { $ref: "#/definitions/Node" },
+          },
+        },
+      },
+    } as unknown as import("../src/openapi/types.js").SwaggerDoc;
+
+    const s = inlineSchema(cyclicDoc, { $ref: "#/definitions/Node" });
+    expect(s.type).toBe("object");
+    expect(s.properties.value.type).toBe("string");
+    // the recursive `next` must be replaced by the circular-ref stub, not expanded
+    expect(s.properties.next.description).toContain("circular ref: Node");
   });
 });
