@@ -220,12 +220,23 @@ For grass, N comes back **per defoliation** (one "Total" row per cut/grazing in
 `calculations[]`, keyed by `defoliationId`) — sum them for the season's total N
 (the fixture's grazing example totals 250 kg N/ha across four defoliations).
 
-### Organic materials (optional) — add to `field.organicMaterials` and set `mannerManures` accordingly
+### Organic materials (optional, verified) — add to `field.organicMaterials`; keep `mannerManures: false`
+
+Verified end-to-end; full payload at `test/fixtures/RecommendationsOrganicInput.json`
+(30 m³/ha of 6% cattle slurry on the arable base). Resolve `materialId` from
+`rb209_organic_material_organic_material_types` and `incorporationMethodId` from
+`rb209_organic_material_incorporation_methods`:
 
 ```json
 { "id": 1, "defoliationId": 1, "applicationDate": "2025-10-18T00:00:00",
   "applicationRate": 30.0, "incorporationMethodId": 5, "materialId": 18 }
 ```
+The engine credits the manure against the crop's need: in the output each
+affected nutrient's Total row gains a `manures` value (available nutrient) and a
+`totalAvailable` object (`{total, available}`), and **`cropNeed = recommendation
+− manures`**. In the verified example the slurry supplied 20 kg N, 18 kg P₂O₅,
+68 kg K₂O available, dropping N cropNeed from 200 to 180.
+
 For a **lab analysis** of the manure, add per-unit nutrient values to the same
 entry to override the material defaults: `"nitrogen": 2.0, "phosphate": 1.1,
 "potash": 3.4, "sulphur": 0.7, "magnesium": 0.6`.
@@ -286,6 +297,7 @@ splits, any "new soil analysis needed" flags).
 | `Please provide a date for soilAnalysisDate` | Every `soilAnalyses[]` entry needs `"soilAnalysisDate"`. |
 | `Field:Arable[0]:CropInfo1Id … missing` (or CropInfo2Id) | Provide `cropInfo1Id` / `cropInfo2Id` on the arable crop (resolve via the CropInfo lookups). |
 | `The PreviousCropTypeId value is missing` | Set `previousCropping.previousCropTypeId` (resolve via the crop-type lookup). |
+| `The ReferenceValue input parameter is not valid` | Keep `referenceValue` plain text — special characters like `+`, `/`, `%` are rejected. Use e.g. `"Cattle slurry example"`. |
 | **422** `Error … calculating the crop order` | Inputs valid but inconsistent — check the crop section matches `fieldType`, only the right sub-object is populated, and previous-cropping IDs are sensible. |
 | **401** on the call | Auth expired; the server refreshes automatically — just retry once. |
 | **429** rate-limit message | Wait the number of seconds stated, then retry. |
@@ -293,10 +305,10 @@ splits, any "new soil analysis needed" flags).
 ## Reference
 
 - **Known-good request/response pairs** (the verified source of truth for the
-  payload shape): arable — `test/fixtures/RecommendationsSampleInput.json` /
-  `RecommendationsSample.json`; grass —
-  `test/fixtures/RecommendationsGrassInput.json` / `RecommendationsGrassSample.json`.
-  Both were captured from live API 200 responses.
+  payload shape), all captured from live API 200 responses:
+  - arable — `test/fixtures/RecommendationsSampleInput.json` / `RecommendationsSample.json`
+  - grass — `test/fixtures/RecommendationsGrassInput.json` / `RecommendationsGrassSample.json`
+  - organic materials — `test/fixtures/RecommendationsOrganicInput.json` / `RecommendationsOrganicSample.json`
 - **AHDB worked examples** (Arable, Grass, Organic Materials, MANNER Outputs,
   Lab Analysis, Measurement): <https://rb209.ahdb.org.uk/Home/WorkedExamples>.
   When copying one, add `"grassland": {}` for the current API build.

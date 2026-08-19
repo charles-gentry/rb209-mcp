@@ -1,0 +1,313 @@
+{
+  "calculations": [
+    {
+      "nutrientId": 0,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 170.0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Nitrogen Recommendation (kg/ha) based on crop group, crop type, crop info 1, soil type and soil nitrogen index.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 0,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 30.0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Nitrogen Yield Adjustment for Feed winter barley",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 0,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 200,
+      "manures": 20,
+      "pkBalance": null,
+      "cropNeed": 180,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": [
+        {
+          "total": 78.0,
+          "available": 20.0
+        }
+      ]
+    },
+    {
+      "nutrientId": 1,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 85.0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Phosphate Recommendation (kg/ha) based on crop group, crop type, crop info 1 and phosphate soil index.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 1,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 12.8,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Phosphate Recommendation (kg/ha) based on crop yield",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 1,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "1",
+      "recommendation": 100,
+      "manures": 18,
+      "pkBalance": 0,
+      "cropNeed": 82,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": [
+        {
+          "total": 36.0,
+          "available": 18.0
+        }
+      ]
+    },
+    {
+      "nutrientId": 2,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "0",
+      "recommendation": 130.0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Potash Recommendation (kg/ha) based on crop group, crop type, crop info 1 and potash soil index.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 2,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "0",
+      "recommendation": 15.8,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Potash Recommendation (kg/ha) based on crop yield",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 2,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "0",
+      "recommendation": 145,
+      "manures": 68,
+      "pkBalance": 0,
+      "cropNeed": 77,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": [
+        {
+          "total": 75.0,
+          "available": 68.0
+        }
+      ]
+    },
+    {
+      "nutrientId": 3,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "2",
+      "recommendation": 0.0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Magnesium Recommendation (kg/ha) based on crop group, crop type and magnesium soil index",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 3,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "2",
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": 0,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": [
+        {
+          "total": 18.0,
+          "available": 0
+        }
+      ]
+    },
+    {
+      "nutrientId": 4,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": null,
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Sodium Recommendation (Na2O kg/ha) based on crop type, crop into 1 id, soil type and potash index.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 4,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": null,
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": 0,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 5,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": null,
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Sulphur Recommendation (SO3 kg/ha) based on crop group and crop type.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 5,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": null,
+      "recommendation": 0,
+      "manures": 2,
+      "pkBalance": null,
+      "cropNeed": 0,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": [
+        {
+          "total": 21.0,
+          "available": 2.0
+        }
+      ]
+    },
+    {
+      "nutrientId": 6,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "6.5",
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": null,
+      "breakdown": false,
+      "description": "Lime Recommendation (t/ha) based on soil pH, soil type and current crop type.",
+      "snsStatus": null,
+      "totalAvailable": null
+    },
+    {
+      "nutrientId": 6,
+      "type": "A",
+      "sequenceId": 1,
+      "defoliationId": 1,
+      "indexpH": "6.5",
+      "recommendation": 0,
+      "manures": null,
+      "pkBalance": null,
+      "cropNeed": 0,
+      "breakdown": true,
+      "description": "Total",
+      "snsStatus": null,
+      "totalAvailable": null
+    }
+  ],
+  "adviceNotes": [
+    {
+      "nutrientId": 0,
+      "sequenceId": 1,
+      "note": "Reduce the recommendation by 25 kg N/ha if the lodging risk is high."
+    },
+    {
+      "nutrientId": 0,
+      "sequenceId": 1,
+      "note": "Split the dressing with 50% during late tillering in mid-February/early March and 50% at GS30-31."
+    },
+    {
+      "nutrientId": 0,
+      "sequenceId": 1,
+      "note": "Where the expected yield is greater than 6.5 t/ha, the N recommendation has been increased by 10 kg N/ha for each 0.5 t/ha additional yield above 6.5 t/ha up to a maximum of 11 t/ha. Where the expected yield is below 6.5 t/ha, the N recommendation has been reduced by 10 kg N/ha for each 0.5 t/ha below 6.5 t/ha."
+    },
+    {
+      "nutrientId": 2,
+      "sequenceId": 1,
+      "note": "Potash may be applied when convenient (see the Nutrient Management Guide)."
+    },
+    {
+      "nutrientId": 6,
+      "sequenceId": 1,
+      "note": "The lime recommendation may be different in mixed grass/arable rotations (see the Nutrient Management Guide)."
+    }
+  ],
+  "referenceValue": "Cattle slurry example",
+  "versionNumber": "v1.0.5"
+}
