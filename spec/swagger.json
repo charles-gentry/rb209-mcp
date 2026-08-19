@@ -1,0 +1,5771 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "RB209WebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/AdviceNote/AdviceNote/{adviceNoteCode}": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "Individual advice note text filtered from the supplied corresponding advice note code.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "adviceNoteCode",
+            "description": "The advice note code to filter on",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/AdviceNotes": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "The full list of available advice notes.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNote"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/AdviceNoteText/{countryId}/{adviceNoteCode}": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "Individual advice note text filtered from the supplied country id and advice note code.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "adviceNoteCode",
+            "description": "The advice note code to filter on",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/ArableEngWal": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "The full list of available advice notes for England and Wales arable.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/ArableScot": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "The full list of available advice notes for Scotland arable.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/GrassEngWal": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "The full list of available advice notes for England and Wales grass.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/AdviceNote/GrassScot": {
+      "get": {
+        "tags": [
+          "AdviceNote"
+        ],
+        "summary": "The full list of available advice notes for Scotland grass.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteData"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropGroup/{cropGroupId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual crop group - filtered by crop group id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropGroupId",
+            "description": "The crop group id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropGroupResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropGroups": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available crop groups.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropGroupResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropInfo1/{cropTypeId}/{cropInfo1Id}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual crop info 1 - filtered by crop type id and crop info 1 id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropTypeId",
+            "description": "The crop type id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "cropInfo1Id",
+            "description": "The crop info 1 id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropInfo1TypeItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropInfo1s": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available crop info 1s.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropInfo1Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropInfo1s/{cropTypeId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "A filtered list of available crop info 1s - filtered by crop type id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropTypeId",
+            "description": "The crop type id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropInfo1Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropInfo2/{cropInfo2Id}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual crop info 2 - filtered by crop info 2 id (only required for arable cereals crops).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropInfo2Id",
+            "description": "The crop info 2 id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropInfo2ItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropInfo2s": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available crop info 2s (only required for arable cereals crops).",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropInfo2Response"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropType/{cropTypeId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual crop type - filtered by crop type id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropTypeId",
+            "description": "The crop type id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropTypeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropTypes": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available crop types.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/CropTypes/{cropGroupId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "A filtered list of available crop types - filtered by crop group id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropGroupId",
+            "description": "The crop group id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/DefaultYields/{countryId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Get the default yield data for the crops.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "Country id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.DefaultYieldResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/PotatoGroup/{potatoGroupId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual potato group - filtered by potato group id (only required for arable potato crops).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "potatoGroupId",
+            "description": "The potato group id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.PotatoGroupItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/PotatoGroups": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available potato groups (only required for arable potato crops).",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.PotatoGroupResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/PotatoVarieties": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "The full list of available potato varieties (only required for arable potato crops).",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.PotatoVarietyResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/PotatoVarieties/{potatoGroupId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "A filtered list of available potato varieties - filtered by potato group id (only required for arable potato crops).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "potatoGroupId",
+            "description": "The potato group id to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.PotatoVarietyResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Arable/PotatoVariety/{potatoVarietyId}": {
+      "get": {
+        "tags": [
+          "Arable"
+        ],
+        "summary": "Individual potato variety - filtered by potato variety id (only required for arable potato crops).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "potatoVarietyId",
+            "description": "The potato variety id to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.PotatoVarietyItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/FertiliserPrices/LatestPrices": {
+      "get": {
+        "tags": [
+          "FertiliserPrices"
+        ],
+        "summary": "Get the latest prices of fertilisers.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Fertiliser.Responses.FertiliserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/FertiliserPrices/RequestAccess": {
+      "post": {
+        "tags": [
+          "FertiliserPrices"
+        ],
+        "summary": "Request access to the fertiliser latest prices endpoint.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The reason for your request to access fertiliser prices, please limit your message to the following characters: a-zA-Z0-9, spaces and the following symbols: ,.-!?'()&",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Fertiliser.Requests.AccessRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Field/Countries": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "The full list of available countries.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.CountryResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/Country/{countryId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Individual country text filtered from the supplied corresponding country id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.CountryItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/FieldType/{fieldTypeId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Individual field type text filtered from the supplied corresponding field type id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "fieldTypeId",
+            "description": "The field type id to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.FieldTypeItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/FieldTypes/{countryId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "The full list of available field types.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.FieldTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/Nutrient/{nutrientId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Individual nutrient text filtered from the supplied corresponding nutrient id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.NutrientItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/Nutrients": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "The full list of available nutrients.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.NutrientResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/SecondCropType_List/{cropGroupId1}/{cropTypeId1}/{cropGroupId2}/{countryId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Some crops (both arable and grassland) allow a second crop to be sown in the same crop year: The filtered list of available second crop types after the first crop.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropGroupId1",
+            "description": "The crop group id of the first crop to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "cropTypeId1",
+            "description": "The crop type id of the first crop to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "cropGroupId2",
+            "description": "The crop group id of the second crop to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "Country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Arable.Responses.CropTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/SiteClass/{siteClassId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Site class of site class id provided.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "siteClassId",
+            "description": "The Site class id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.SiteClassItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/SiteClasses/{countryId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Site class list.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The Country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.SiteClassResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Field/SiteClassItem/{soilTypeId}/{altitude}/{postcode}/{countryId}": {
+      "get": {
+        "tags": [
+          "Field"
+        ],
+        "summary": "Site class of field.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "soilTypeId",
+            "description": "The soil type id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "altitude",
+            "description": "The altitude of the field",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "postcode",
+            "description": "First half of postcode, eg: AB12",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "Country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Field.Responses.SiteClassResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/DefoliationSequence/{defoliationSequenceId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Get the text of the defoliation sequence for the provided defoliation sequence id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "defoliationSequenceId",
+            "description": "The defoliation sequence id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.DefoliationSequenceResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/DefoliationSequences/{swardTypeId}/{swardManagementId}/{numberOfCuts}/{newSward}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Deprecated - The list of different defoliation sequences available for grass fields.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardTypeId",
+            "description": "The sward type id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "swardManagementId",
+            "description": "The sward management id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "numberOfCuts",
+            "description": "The number of cuts made to the field in the season.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "newSward",
+            "description": "Whether a new sward (true) or not (false).",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.DefoliationSequenceResponse"
+              }
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/Grass/DefoliationSequences/{swardTypeId}/{swardManagementId}/{numberOfCuts}/{newSward}/{countryId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of different defoliation sequences available for grass fields.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardTypeId",
+            "description": "The sward type id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "swardManagementId",
+            "description": "The sward management id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "numberOfCuts",
+            "description": "The number of cuts made to the field in the season.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "newSward",
+            "description": "Whether a new sward (true) or not (false).",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.DefoliationSequenceResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassGrowthClass/{grassGrowthClassId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Individual grass growth class (GGC) text filtered from the supplied corresponding grass growth class id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grassGrowthClassId",
+            "description": "The grass growth class id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClassItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassGrowthClass/{soilTypeId}/{rainfall}/{altitude}/{chalk}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Calculate the grass growth class (GGC) for a grassland field.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "soilTypeId",
+            "description": "The soil type id of the field",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "rainfall",
+            "description": "The mean summer rainfall (April to September inclusive) at the field",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "altitude",
+            "description": "The altitude of the field",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "chalk",
+            "description": "For shallow soils only, need to specify whether over chalk or not",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClassType"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassGrowthClasses/{countryId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Full list of available grass growth classes (GGC) for grassland fields.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The Country ID to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClass"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassHistories/{countryId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Grass history list of grass fields.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassHistory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassHistory/{grassHistoryId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Grass history of grass history id provided.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "grassHistoryId",
+            "description": "The Grass History ID",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GetGrassHistoryName"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassSeason/{seasonId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "This endpoint is used to return grass season.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "seasonId",
+            "description": "The season id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassSeasonItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/GrassSeasons/{countryId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "This endpoint is used to return grass seasons.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.GrassSeason"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/PotentialCuts/{swardTypeId}/{swardManagementId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of different number of cuts for the field.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardTypeId",
+            "description": "The sward type id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "swardManagementId",
+            "description": "The sward management id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.PotentialCutResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SiteClassId/{soilTypeId}/{rainfall}/{altitude}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Calculate the site class id for Scottish grassland fields.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "soilTypeId",
+            "description": "The soil type id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "rainfall",
+            "description": "The rainfall value at the field (mm).",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "altitude",
+            "description": "The altitude of the field (metres above sea level).",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.Responses.SiteClassIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SwardManagement/{swardManagementId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Get the text of the sward management for the provided sward management id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardManagementId",
+            "description": "The sward management id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.SwardManagementResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SwardManagements": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of different sward managements available for grass fields.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.SwardManagementResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SwardManagements/{swardTypeId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of different sward managements available for the provided sward type.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardTypeId",
+            "description": "The sward type id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.SwardManagementResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SwardType/{swardTypeId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "Get the text of the sward type for the provided sward type id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "swardTypeId",
+            "description": "The Sward Type Id of the field.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.GrassSwardTypeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/SwardTypes": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of different sward types available for grass fields.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.GrassSwardTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/YieldRangesEnglandAndWales/{sequenceId}/{grassGrowthClassId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of yield ranges for grass fields in England and Wales.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sequenceId",
+            "description": "The id of the defoliation sequence to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "grassGrowthClassId",
+            "description": "The id of the grass growth class to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.YieldRangeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Grass/YieldRangesScotland/{sequenceId}/{siteClassId}": {
+      "get": {
+        "tags": [
+          "Grass"
+        ],
+        "summary": "The list of yield ranges for grass fields in Scotland.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sequenceId",
+            "description": "The id of the defoliation sequence to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "siteClassId",
+            "description": "The id of the site class to filter on.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Grass.YieldRangeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/CropHeights": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "Full list of available crop heights.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.CropHeightResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/GreenAreaIndexes": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "Full list of available green area indexes.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.GreenAreaIndexResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/Seasons": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "Full list of available seasons.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.MeasurementSeason"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/ShootNumbers": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "Full list of available shoot numbers.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.MeasurementShootNumber"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/SmnConversionMethod/{smnValue}/{soilLayer}": {
+      "get": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "The get smn value to be converted from N/kg to kg/ha.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "smnValue",
+            "description": "smn value in N/kg",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "soilLayer",
+            "description": "layer of soil in cm",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.GetSmnConversion"
+            }
+          }
+        }
+      }
+    },
+    "/api/Measurement/MeasurementMethod": {
+      "post": {
+        "tags": [
+          "Measurement"
+        ],
+        "summary": "The endpoint to calculate sns index using the measurement method in England & Wales.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethod"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.MeasurementMethodOutput"
+            }
+          }
+        }
+      }
+    },
+    "/api/MeasurementScotland/MeasurementMethod": {
+      "post": {
+        "tags": [
+          "MeasurementScotland"
+        ],
+        "summary": "The endpoint to calculate residue group using SMN measurement values in Scotland.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.MeasurementScotland.Requests.MeasurementMethodScotland"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.MeasurementScotland.Responses.MeasurementMethodScotlandOutput"
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/IncorporationMethod/{incorporationMethodId}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "Organic material incorporation method item based on incorporation method id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "incorporationMethodId",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.IncorporationMethodItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/IncorporationMethods": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "Organic material incorporation method list.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.IncorporationMethod"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/IncorporationMethods/{organicMaterialTypeId}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "Organic material incorporation method list based on organicMaterialTypeId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialTypeId",
+            "description": "OrganicMaterialTypeId to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.IncorporationMethod"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialCategories": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint is used to return organic material categories.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialCategory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialCategoryItem/{organicMaterialCategoryId}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint is used to return organic material category item.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialCategoryId",
+            "description": "The Organic material category id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialCategoryItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypeItem/{organicMaterialTypeId}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint is used to return organic material type of organic material type id provided.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialTypeId",
+            "description": "The Organic Material Type ID",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypeItem/{organicMaterialTypeId}/{dryMatterSplit}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint is used to return organic material type item for provided organicMaterialTypeId and dryMatterSplit.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialTypeId",
+            "description": "The Organic Material Type ID",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "dryMatterSplit",
+            "description": "To determine whether to return materials that have separate dry matter percentages or just a single general material",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypes": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint used to return organic material types.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterial"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypes/{dryMatterSplit}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint used to return organic material types based on filter.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "dryMatterSplit",
+            "description": "True/False",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterial"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypes/{organicMaterialCategoryId}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint used to return organic material types for provided organicMaterialCategoryId.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialCategoryId",
+            "description": "Organic material category filter",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterial"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/OrganicMaterial/OrganicMaterialTypes/{organicMaterialCategoryId}/{dryMatterSplit}": {
+      "get": {
+        "tags": [
+          "OrganicMaterial"
+        ],
+        "summary": "This endpoint used to return organic material types for provided organicMaterialCategoryId and dryMatterSplit.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "organicMaterialCategoryId",
+            "description": "Organic material category filter",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "dryMatterSplit",
+            "description": "True/False",
+            "required": true,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterial"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/PreviousCropping/PreviousGrass/{previousGrassId}": {
+      "get": {
+        "tags": [
+          "PreviousCropping"
+        ],
+        "summary": "Individual previous grass - filtered by previous grass id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "previousGrassId",
+            "description": "The previous grass id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.PreviousCropping.Responses.PreviousGrassItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/PreviousCropping/PreviousGrasses": {
+      "get": {
+        "tags": [
+          "PreviousCropping"
+        ],
+        "summary": "The full list of available previous grasses.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.PreviousCropping.Responses.PreviousGrassResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Rainfall/RainfallAverage/{postcode}": {
+      "get": {
+        "tags": [
+          "Rainfall"
+        ],
+        "summary": "Average rainfall of the field across the whole year.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postcode",
+            "description": "First half of postcode, eg: AB12",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Rainfall.Responses.AverageRainfallItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/Rainfall/SummerRainfallAverage/{postcode}": {
+      "get": {
+        "tags": [
+          "Rainfall"
+        ],
+        "summary": "Average rainfall of the field during the summer months (April - September).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postcode",
+            "description": "First half of postcode, eg: AB12",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Rainfall.Responses.SummerRainfallItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/Rainfall/WinterRainfallAverage/{postcode}": {
+      "get": {
+        "tags": [
+          "Rainfall"
+        ],
+        "summary": "Average rainfall of the field during the winter months (October - March).",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "postcode",
+            "description": "First half of postcode, eg: AB12",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Rainfall.Responses.WinterRainfallItem"
+            }
+          }
+        }
+      }
+    },
+    "/api/Recommendation/CalculateNutrientDeficiency/{cropTypeId}/{leafSamplingPosition}/{nutrientId}/{nutrientContent}": {
+      "get": {
+        "tags": [
+          "Recommendation"
+        ],
+        "summary": "To get the nutrient deficiency result bases on leaf analysis.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropTypeId",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "leafSamplingPosition",
+            "description": "leaf sampling position",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "nutrient Id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientContent",
+            "description": "content of nutrient",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Responses.LeafAnalysisResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Recommendation/CalculateNutrientOfftake": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "summary": "The calculate crop nutrient offtake value.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.CropInformation"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Responses.CropNutrientOfftake"
+            }
+          }
+        }
+      }
+    },
+    "/api/Recommendation/Recommendations": {
+      "post": {
+        "tags": [
+          "Recommendation"
+        ],
+        "summary": "The main connection to calculate nutrient recommendations.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Input DataSet required for the connection - containing Field and Nutrient details.",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.DataInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Responses.DataOutput"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/Methodologies/{nutrientId}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "A filtered list of available soil methodologies - filtered by nutrient id and country id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The country id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.MethodologyResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/Methodology/{nutrientId}/{methodologyId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual soil methodology - filtered by nutrient id and methodology id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.MethodologyItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientIndex/{nutrientId}/{indexId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual nutrient index item - filtered by nutrient id and index id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "indexId",
+            "description": "The index id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndexItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientIndex/{nutrientId}/{nutrientValue}/{methodologyId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual nutrient index item - filtered by nutrient id, nutrient value and methodology id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientValue",
+            "description": "Volume of the nutrient applied to filter on (kg/ha)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndexResponse"
+            }
+          }
+        },
+        "deprecated": true
+      }
+    },
+    "/api/Soil/NutrientIndex/{nutrientId}/{nutrientValue}/{methodologyId}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual nutrient index item - filtered by nutrient id, nutrient value, methodology id and country Id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientValue",
+            "description": "Volume of the nutrient applied to filter on (kg/ha)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The value of country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndexResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientIndexes/{methodologyId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "A list of the available nutrient indexes across nutrients - filtered by methodology id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on (optional)",
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndexesResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientIndexIdFromValue/{nutrientId}/{methodologyId}/{nutrientValue}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual nutrient index id - filtered by nutrient id, methodology id and nutrient value.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientValue",
+            "description": "The value of the nutrient (mg/litre)",
+            "required": true,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The value of country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndexIdFromValue"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientIndices/{nutrientId}/{methodologyId}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "A filtered list of available nutrient indexes - filtered by nutrient id, methodology id and country id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The nutrient id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "methodologyId",
+            "description": "The methodology id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The Country ID to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientIndicesResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NutrientTargetIndex/{cropGroupId}/{nutrientId}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Get the nutrient target index.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropGroupId",
+            "description": "The value of crop group id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "nutrientId",
+            "description": "The value of nutrient id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The value of country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.NutrientTargetIndexId"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/NvzActionProgram/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "The full list of NVZ action program.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The value of country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.GetNvzList"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/SoilPhRecommendation/{soilTypeId}/{countryId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Get list of soil ph recommendation level.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "soilTypeId",
+            "description": "The value of soil type id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "countryId",
+            "description": "The value of country id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.GetSoilPhLevel"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/SoilPsc/{cropGroupId}/{pIndexId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Get the list of all available PSC for selected crop group.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "cropGroupId",
+            "description": "The value of crop group id",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "path",
+            "name": "pIndexId",
+            "description": "The value of pIndexId",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.PscDetail"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/SoilType/{soilTypeId}": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "Individual soil type - filtered by soil type id.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "soilTypeId",
+            "description": "The soil type id to filter on",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.SoilTypeItemResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Soil/SoilTypes": {
+      "get": {
+        "tags": [
+          "Soil"
+        ],
+        "summary": "The full list of available soil types.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.SoilTypeResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Login": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Login to api.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.User.Requests.LoginRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.User.Responses.TokenResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Logout": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Logout of api.",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.User.Responses.LogoutResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/Users/Refresh_Token": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Refresh access token for api.",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.User.Requests.RefreshTokenRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RB209Models.RB209WebApi.User.Responses.TokenResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNote": {
+      "type": "object",
+      "description": "The Advice Note class - contains all elements which relate to the Advice Note returned",
+      "properties": {
+        "adviceNoteCode": {
+          "type": "string",
+          "description": "Code of the Advice Note",
+          "x-nullable": true
+        },
+        "adviceNoteText": {
+          "type": "string",
+          "description": "Full text of the Advice Note",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify the advice note code",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteData": {
+      "type": "object",
+      "description": "The Advice Note class - contains all elements which relate to the Advice Note returned",
+      "properties": {
+        "adviceNoteCode": {
+          "type": "string",
+          "description": "Code of the Advice Note",
+          "x-nullable": true
+        },
+        "adviceNoteText": {
+          "type": "string",
+          "description": "Full text of the Advice Note",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.AdviceNote.Responses.AdviceNoteItem": {
+      "type": "object",
+      "description": "The Advice Note item class",
+      "properties": {
+        "adviceNoteText": {
+          "type": "string",
+          "description": "Text value for Advice Note",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify the advice note code",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropGroupResponse": {
+      "type": "object",
+      "description": "Croup Group response class - contains all elements which relate to crop groups",
+      "properties": {
+        "cropGroupId": {
+          "type": "integer",
+          "description": "ID of the Crop Group",
+          "format": "int32"
+        },
+        "cropGroupName": {
+          "type": "string",
+          "description": "Name of the Crop Group",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify the Crop Group",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropInfo1Response": {
+      "type": "object",
+      "description": "Croup Info1 response class - contains all elements which relate to crop info 1",
+      "properties": {
+        "cropInfo1Id": {
+          "type": "integer",
+          "description": "ID of CropInfo1",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropInfo1Name": {
+          "type": "string",
+          "description": "Name of CropInfo1",
+          "x-nullable": true
+        },
+        "cropTypeId": {
+          "type": "integer",
+          "description": "ID of CropType",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify CropInfo1",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropInfo1TypeItemResponse": {
+      "type": "object",
+      "description": "Croup Info1 Type response class - contains all elements which relate to crop info 1 type",
+      "properties": {
+        "cropInfo1Name": {
+          "type": "string",
+          "description": "Name of CropInfo1",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropInfo2ItemResponse": {
+      "type": "object",
+      "description": "Croup Info2 Item response class - contains all elements which relate to crop info 2 item",
+      "properties": {
+        "cropInfo2Name": {
+          "type": "string",
+          "description": "Name of CropInfo2",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropInfo2Response": {
+      "type": "object",
+      "description": "Croup Info2 response class - contains all elements which relate to crop info 2",
+      "properties": {
+        "cropInfo2Id": {
+          "type": "integer",
+          "description": "ID of CropInfo2",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropInfo2": {
+          "type": "string",
+          "description": "Name of CropInfo2",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify CropInfo2",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.CropTypeResponse": {
+      "type": "object",
+      "description": "Croup Type response class - contains all elements which relate to crop type",
+      "properties": {
+        "cropTypeId": {
+          "type": "integer",
+          "description": "ID of the Crop Type",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropType": {
+          "type": "string",
+          "description": "Name of the Crop Type",
+          "x-nullable": true
+        },
+        "cropGroupId": {
+          "type": "integer",
+          "description": "ID of the Crop Group",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify the Crop Type",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.DefaultYieldResponse": {
+      "type": "object",
+      "description": "Croup Default Yield response class",
+      "properties": {
+        "cropTypeId": {
+          "type": "integer",
+          "description": "Id of the Crop Type",
+          "format": "int32"
+        },
+        "cropType": {
+          "type": "string",
+          "description": "Name of the Crop Type",
+          "x-nullable": true
+        },
+        "defaultYield": {
+          "type": "number",
+          "description": "Value of the default yield",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.PotatoGroupItemResponse": {
+      "type": "object",
+      "description": "Potato group Item class - contains all elements which relate to potato group item",
+      "properties": {
+        "potatoGroup": {
+          "type": "string",
+          "description": "Name of Potato Group",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.PotatoGroupResponse": {
+      "type": "object",
+      "description": "Potato group class - contains all elements which relate to potato group",
+      "properties": {
+        "potatoGroupId": {
+          "type": "integer",
+          "description": "Id of Potato Group",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "potatoGroup": {
+          "type": "string",
+          "description": "Name of Potato Group",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify Potato Group",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.PotatoVarietyItemResponse": {
+      "type": "object",
+      "description": "Potato variety Item class - contains all elements which relate to potato variety item",
+      "properties": {
+        "potatoVariety": {
+          "type": "string",
+          "description": "Name of Potato Variety",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Arable.Responses.PotatoVarietyResponse": {
+      "type": "object",
+      "description": "Potato variety class - contains all elements which relate to potato variety",
+      "properties": {
+        "potatoVarietyId": {
+          "type": "integer",
+          "description": "Id of Potato Variety",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "potatoGroupId": {
+          "type": "integer",
+          "description": "Id of Potato Group",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "potatoVariety": {
+          "type": "string",
+          "description": "Name of Potato Variety",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify Potato Variety",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Fertiliser.Requests.AccessRequest": {
+      "type": "object",
+      "description": "Request access.",
+      "properties": {
+        "reason": {
+          "type": "string",
+          "description": "Request access reason.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Fertiliser.Responses.FertiliserPrice": {
+      "type": "object",
+      "description": "Fertiliser price.",
+      "properties": {
+        "fertiliser": {
+          "type": "string",
+          "description": "The fertiliser that the price is for.",
+          "x-nullable": true
+        },
+        "month": {
+          "type": "string",
+          "description": "The month that the price is for.",
+          "x-nullable": true
+        },
+        "price": {
+          "type": "number",
+          "description": "The latest available price for the fertiliser.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Fertiliser.Responses.FertiliserResponse": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "nutrientItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Fertiliser.Responses.FertiliserPrice"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.CountryItemResponse": {
+      "type": "object",
+      "description": "Country Item class - contains all elements which relate to Country Item",
+      "properties": {
+        "country": {
+          "type": "string",
+          "description": "Name of the Country",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.CountryResponse": {
+      "type": "object",
+      "description": "Country class - contains all elements which relate to Country",
+      "properties": {
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32"
+        },
+        "country": {
+          "type": "string",
+          "description": "Name of the Country",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.FieldTypeItemResponse": {
+      "type": "object",
+      "description": "Field Type Item class - contains all elements which relate to field type item",
+      "properties": {
+        "fieldType": {
+          "type": "string",
+          "description": "Name of the Field Type",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.FieldTypeResponse": {
+      "type": "object",
+      "description": "Field Type class - contains all elements which relate to field type",
+      "properties": {
+        "fieldTypeId": {
+          "type": "integer",
+          "description": "Id of the Field Type",
+          "format": "int32"
+        },
+        "fieldType": {
+          "type": "string",
+          "description": "Name of the Field Type",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.NutrientItemResponse": {
+      "type": "object",
+      "description": "Nutrient item class - contains all elements which relate to nutrient item",
+      "properties": {
+        "nutrient": {
+          "type": "string",
+          "description": "Name of the Nutrient",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.NutrientResponse": {
+      "type": "object",
+      "description": "Nutrient class - contains all elements which relate to nutrient",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "Id of the Nutrient",
+          "format": "int32"
+        },
+        "nutrient": {
+          "type": "string",
+          "description": "Name of the Nutrient",
+          "x-nullable": true
+        },
+        "formulae": {
+          "type": "string",
+          "description": "Formulae of the Nutrient",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.SiteClassItemResponse": {
+      "type": "object",
+      "description": "Siteclass Item class - contains all elements which relate to siteclass Item",
+      "properties": {
+        "siteClass": {
+          "type": "string",
+          "description": "Name of the Site Class",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Field.Responses.SiteClassResponse": {
+      "type": "object",
+      "description": "Siteclass class - contains all elements which relate to siteclass",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "siteClassId": {
+          "type": "integer",
+          "description": "Id of the Site Class",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "siteClass": {
+          "type": "string",
+          "description": "Name of the Site Class",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.DefoliationSequenceResponse": {
+      "type": "object",
+      "description": "The Defoliation Sequence Response for the RB209 Web API.",
+      "properties": {
+        "defoliationSequenceId": {
+          "type": "integer",
+          "description": "The Defoliation Sequence Id.",
+          "format": "int32"
+        },
+        "defoliationSequence": {
+          "type": "string",
+          "description": "The Defoliation Sequence Text.",
+          "x-nullable": true
+        },
+        "defoliationSequenceDescription": {
+          "type": "string",
+          "description": "The Defoliation Sequence Description.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.GrassSwardTypeResponse": {
+      "type": "object",
+      "description": "Represents a Grass Sward Type.",
+      "properties": {
+        "swardTypeId": {
+          "type": "integer",
+          "description": "The id of the sward type.",
+          "format": "int32"
+        },
+        "swardType": {
+          "type": "string",
+          "description": "The name of the sward type.",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "The id of the country.",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.PotentialCutResponse": {
+      "type": "object",
+      "description": "Represents a Potential Cut.",
+      "properties": {
+        "potentialCutId": {
+          "type": "integer",
+          "description": "The numeric value for a valid potential cut allowed for the field.",
+          "format": "int32"
+        },
+        "potentialCutText": {
+          "type": "string",
+          "description": "The text value for a valid potential cut allowed for the field.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GetGrassHistoryName": {
+      "type": "object",
+      "properties": {
+        "grassHistoryName": {
+          "type": "string",
+          "description": "The Text value for Grass History",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClass": {
+      "type": "object",
+      "description": "The Growth Grass Class (GGC) class",
+      "properties": {
+        "grassGrowthClassId": {
+          "type": "integer",
+          "description": "The ID value for a Grass Growth Class (GGC) item",
+          "format": "int32"
+        },
+        "grassGrowthClassName": {
+          "type": "string",
+          "description": "The Text value for a Grass Growth Class (GGC) item",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClassItem": {
+      "type": "object",
+      "description": "The Grass Growth Class (GGC) item class",
+      "properties": {
+        "grassGrowthClassName": {
+          "type": "string",
+          "description": "The Text value of Grass Growth Class (GGC)",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassGrowthClassType": {
+      "type": "object",
+      "description": "Grass growth class - contains all elements which relate to Grass growth",
+      "properties": {
+        "grassGrowthClassName": {
+          "type": "string",
+          "description": "The Text value of Grass Growth Class (GGC)",
+          "x-nullable": true
+        },
+        "grassGrowthClassId": {
+          "type": "integer",
+          "description": "The ID value for a Grass Growth Class (GGC) item",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassHistory": {
+      "type": "object",
+      "description": "The Grass History class - contains all elements which relate to the Grass History of the field, this is a group within the Grassland section of a field",
+      "properties": {
+        "grassHistoryId": {
+          "type": "integer",
+          "description": "The ID value for a Grass History item",
+          "format": "int32"
+        },
+        "grassHistoryName": {
+          "type": "string",
+          "description": "The Text value for a Grass History item",
+          "x-nullable": true
+        },
+        "showForLightSoils": {
+          "type": "boolean",
+          "description": "Whether to display Grass History for light soil type"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassSeason": {
+      "type": "object",
+      "description": "The Grass Season class",
+      "properties": {
+        "seasonId": {
+          "type": "integer",
+          "description": "The ID value for a Grassland Season item",
+          "format": "int32"
+        },
+        "seasonName": {
+          "type": "string",
+          "description": "The Text value for a Grassland Season item",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.GrassSeasonItem": {
+      "type": "object",
+      "description": "The Grass Season Item class",
+      "properties": {
+        "seasonName": {
+          "type": "string",
+          "description": "The Text value for a Grassland Season item",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.Responses.SiteClassIdResponse": {
+      "type": "object",
+      "description": "Site class response for Scottish grassland fields",
+      "properties": {
+        "siteClassId": {
+          "type": "integer",
+          "description": "The site class id value.",
+          "format": "int32"
+        },
+        "siteClass": {
+          "type": "string",
+          "description": "The site class text name.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.SwardManagementResponse": {
+      "type": "object",
+      "description": "Represents a Sward Management.",
+      "properties": {
+        "swardManagementId": {
+          "type": "integer",
+          "description": "The id of the sward management.",
+          "format": "int32"
+        },
+        "swardManagement": {
+          "type": "string",
+          "description": "The name of the sward management.",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "The country id of the sward management.",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Grass.YieldRangeResponse": {
+      "type": "object",
+      "description": "The Yield Range Response for the RB209 Web API.",
+      "properties": {
+        "yieldId": {
+          "type": "integer",
+          "description": "The numeric value for a valid yield.",
+          "format": "int32"
+        },
+        "yieldText": {
+          "type": "string",
+          "description": "The text value for a valid yield",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.CropInformation": {
+      "type": "object",
+      "description": "Crop Information",
+      "properties": {
+        "cropGroupId": {
+          "type": "integer",
+          "description": "The Crop Group ID of the crop",
+          "format": "int32"
+        },
+        "cropTypeId": {
+          "type": "integer",
+          "description": "The Crop Type ID of the crop in the field",
+          "format": "int32"
+        },
+        "cropInfo1Id": {
+          "type": "integer",
+          "description": "The Crop Info 1 ID of the crop in the field",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropInfo2Id": {
+          "type": "integer",
+          "description": "The Crop Info 2 ID of the crop in the field",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "The Country Id for the crop",
+          "format": "int32"
+        },
+        "nutrientId": {
+          "type": "integer",
+          "description": "The Nutrient Id for the crop",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethod": {
+      "type": "object",
+      "description": "Inputs required for the Measurement Method for calculating SNS Index",
+      "properties": {
+        "cropTypeId": {
+          "type": "integer",
+          "description": "The Crop Type in the field being grown",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "seasonId": {
+          "type": "integer",
+          "description": "The Season that the measurement was taken for the crop, required only if using the Shoot Number or Crop Height methods for Cereals or Other Arable crops",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "step1ArablePotato": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep1ArablePotato"
+        },
+        "step1Veg": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep1Veg"
+        },
+        "step2": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep2"
+        },
+        "step3": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep3"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep1ArablePotato": {
+      "type": "object",
+      "description": "Inputs for Measurement Method Step 1 if the crop is Arable or Potatoes.",
+      "properties": {
+        "depth0To30Cm": {
+          "type": "integer",
+          "description": "Soil Mineral Nitrogen sampling value (kg N/ha) at depth 0cm to 30cm",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "depth30To60Cm": {
+          "type": "integer",
+          "description": "Soil Mineral Nitrogen sampling value (kg N/ha) at depth 30cm to 60cm",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "depth60To90Cm": {
+          "type": "integer",
+          "description": "Soil Mineral Nitrogen sampling value (kg N/ha) at depth 60cm to 90cm, note that this is an optional input and should only be provided when an Autumn season is provided under the SeasonId parameter - see Section 4 - Measurement Method for more details",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep1Veg": {
+      "type": "object",
+      "description": "Inputs for Measurement Method Step 1 if the crop is Vegetables, Bulbs or Herbs",
+      "properties": {
+        "depthCm": {
+          "type": "integer",
+          "description": "The depth in that SMN measurement was taken at (cm)",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "depthValue": {
+          "type": "integer",
+          "description": "Soil Mineral Nitrogen sampling value (kg N/ha)",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep2": {
+      "type": "object",
+      "description": "Inputs for Measurement Method Step 2",
+      "properties": {
+        "shootNumber": {
+          "type": "integer",
+          "description": "The Crop Nitrogen value calculated from the Shoot Number Method (shoot number/m2). Only relevant for winter cereal crops.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "greenAreaIndex": {
+          "type": "number",
+          "description": "The Crop Nitrogen value calculated from the Green Area Index Method (GAI). Only relevant for winter oilseed rape.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "cropHeight": {
+          "type": "integer",
+          "description": "The Crop Nitrogen value calculated from the Crop Height Method (cm). Only relevant for winter oilseed rape.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Requests.MeasurementMethodStep3": {
+      "type": "object",
+      "description": "Inputs for Measurement Method Step 3",
+      "properties": {
+        "adjustment": {
+          "type": "integer",
+          "description": "The Crop Nitrogen adjustment value based on local knowledge, note that this is an optional value and should be between 0 and 60kg N/ha. For further information see sections 4 and 5 - Make an adjustment for net mineralisable nitrogen. If you are providing this value, do not provide a value for OrganicMatterPercentage.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "organicMatterPercentage": {
+          "type": "number",
+          "description": "The Organic Matter Percentage value based on local knowledge, note that this is an optional value and should be between 0 and 100%. Values less than 4% will be defaulted to 4%, while values greater than 10% will be defaulted to 10%. For further information see sections 4 and 5 - Make an adjustment for net mineralisable nitrogen. If you are providing this value, do not provide a value for Adjustment.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.CropHeightResponse": {
+      "type": "object",
+      "description": "Crop height response class - contains all elements which relate to crop height response",
+      "properties": {
+        "cropHeight": {
+          "type": "integer",
+          "description": "Height of the Crop",
+          "format": "int32"
+        },
+        "autumn": {
+          "type": "integer",
+          "description": "Value of Autumn",
+          "format": "int32"
+        },
+        "spring": {
+          "type": "integer",
+          "description": "Value of Spring",
+          "format": "int32"
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country to identify crop height",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.CropNutrientOfftake": {
+      "type": "object",
+      "description": "Crop Nutrient Offtake Class - Contains all elements which relate to the Nutrient Offtake",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "Id of the Nutrient",
+          "format": "int32"
+        },
+        "nutrient": {
+          "type": "string",
+          "description": "Name of the Nutrient",
+          "x-nullable": true
+        },
+        "offtake": {
+          "type": "number",
+          "description": "Nutrient Offtake Value",
+          "format": "double"
+        },
+        "nutrientPercentageToKg": {
+          "type": "number",
+          "description": "Nutrient percentage to Kg",
+          "format": "double"
+        },
+        "nutrientPpmToKg": {
+          "type": "number",
+          "description": "Nutrient Ppm to Kg",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.GetSmnConversion": {
+      "type": "object",
+      "description": "SMN Conversion method class - gets SMN value in Kg N/ha.",
+      "properties": {
+        "smnValue": {
+          "type": "number",
+          "description": "The SMN Value (kg N/ha)",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.GreenAreaIndexResponse": {
+      "type": "object",
+      "description": "GreenAreaIndex class - contains all elements which relate to Green Area Index",
+      "properties": {
+        "greenAreaIndex": {
+          "type": "number",
+          "description": "Green Area Index",
+          "format": "double"
+        },
+        "value": {
+          "type": "integer",
+          "description": "Value",
+          "format": "int32"
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.MeasurementMethodOutput": {
+      "type": "object",
+      "description": "Measurement Method Class - Contains SNS elements related to Measurement Method.",
+      "properties": {
+        "snsValue": {
+          "type": "integer",
+          "description": "The SNS Value (kg N/ha)",
+          "format": "int32"
+        },
+        "snsIndex": {
+          "type": "integer",
+          "description": "The SNS Index",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.MeasurementSeason": {
+      "type": "object",
+      "description": "Measurement Season class - contains all elements which relate to Measurement Season",
+      "properties": {
+        "seasonId": {
+          "type": "integer",
+          "description": "ID of the Season",
+          "format": "int32"
+        },
+        "season": {
+          "type": "string",
+          "description": "Name of the Season",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Measurement.Responses.MeasurementShootNumber": {
+      "type": "object",
+      "description": "Measurement Shoot Number class - contains all elements which relate to MeasurementShootNumber",
+      "properties": {
+        "shootNumber": {
+          "type": "integer",
+          "description": "Shoot Number",
+          "format": "int32"
+        },
+        "autumn": {
+          "type": "integer",
+          "description": "Value of Autumn",
+          "format": "int32"
+        },
+        "spring": {
+          "type": "integer",
+          "description": "Value of Spring",
+          "format": "int32"
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.MeasurementScotland.Requests.MeasurementMethodScotland": {
+      "type": "object",
+      "description": "Inputs required for the Measurement Method for calculating residue group using SMN measurement values in Scotland.",
+      "properties": {
+        "smnDepth": {
+          "type": "integer",
+          "description": "The depth in that SMN measurement was taken at (cm).",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "measuredSmn": {
+          "type": "integer",
+          "description": "Soil Mineral Nitrogen sampling value (kg N/ha).",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.MeasurementScotland.Responses.MeasurementMethodScotlandOutput": {
+      "type": "object",
+      "description": "Measurement Method Class - Contains SMN elements related to Measurement Method for Scotland.",
+      "properties": {
+        "residueGroupId": {
+          "type": "integer",
+          "description": "The id of the residue group.",
+          "format": "int32"
+        },
+        "residueGroup": {
+          "type": "string",
+          "description": "The name of the residue group.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.IncorporationMethod": {
+      "type": "object",
+      "description": "The Incorporation Method class",
+      "properties": {
+        "incorporationMethodId": {
+          "type": "integer",
+          "description": "Method Id",
+          "format": "int32"
+        },
+        "incorporationMethodName": {
+          "type": "string",
+          "description": "Method Name",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Id of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.IncorporationMethodItem": {
+      "type": "object",
+      "description": "This class return IncorporationMethod",
+      "properties": {
+        "incorporationMethodName": {
+          "type": "string",
+          "description": "Method Name",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterial": {
+      "type": "object",
+      "description": "Organic Material Class - contains all elements which relate to Organic material class.",
+      "properties": {
+        "organicMaterialTypeName": {
+          "type": "string",
+          "description": "Organic material Type Name",
+          "x-nullable": true
+        },
+        "dryMatter": {
+          "type": "number",
+          "description": "Dry matter Value",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalN": {
+          "type": "number",
+          "description": "The Total Nitrogen (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalP": {
+          "type": "number",
+          "description": "The Total Phosphate (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalK": {
+          "type": "number",
+          "description": "The Total Potash (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalMg": {
+          "type": "number",
+          "description": "The Total Magnesium (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalS": {
+          "type": "number",
+          "description": "The Total Sulphur (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "organicMaterialTypeId": {
+          "type": "integer",
+          "description": "Organic Material Type Id",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialCategory": {
+      "type": "object",
+      "description": "Organic material category class - contains all elements which relate to Organic material category.",
+      "properties": {
+        "categoryId": {
+          "type": "integer",
+          "description": "category ID of the Organic Material",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "categoryName": {
+          "type": "string",
+          "description": "Name of the Organic material category",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialCategoryItem": {
+      "type": "object",
+      "description": "Organic material category item class - contains all elements which relate to Organic material category item.",
+      "properties": {
+        "categoryName": {
+          "type": "string",
+          "description": "Name of the Organic material category",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.OrganicMaterial.OrganicMaterialItem": {
+      "type": "object",
+      "description": "Organic Material Item Class - contains all elements which relate to Organic material item.",
+      "properties": {
+        "organicMaterialTypeName": {
+          "type": "string",
+          "description": "Organic material Type Name",
+          "x-nullable": true
+        },
+        "dryMatter": {
+          "type": "number",
+          "description": "Dry matter Value",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalN": {
+          "type": "number",
+          "description": "The Total Nitrogen (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalP": {
+          "type": "number",
+          "description": "The Total Phosphate (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalK": {
+          "type": "number",
+          "description": "The Total Potash (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalMg": {
+          "type": "number",
+          "description": "The Total Magnesium (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "totalS": {
+          "type": "number",
+          "description": "The Total Sulphur (kg/Tonne or kg/m3) in the Organic Material",
+          "format": "double",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.PreviousCropping.Responses.PreviousGrassItemResponse": {
+      "type": "object",
+      "description": "Previous Grass Item class - Contains all element which relate to Previous Grass Item",
+      "properties": {
+        "previousGrass": {
+          "type": "string",
+          "description": "Name of the Previous Grass",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.PreviousCropping.Responses.PreviousGrassResponse": {
+      "type": "object",
+      "description": "Previous Grass class - Contains all elements which relate to Previous Grass",
+      "properties": {
+        "previousGrassId": {
+          "type": "integer",
+          "description": "Id of the Previous Grass",
+          "format": "int32"
+        },
+        "previousGrass": {
+          "type": "string",
+          "description": "Name of the Previous Grass",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "Country Id to identify Previous Grass",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Rainfall.Responses.AverageRainfallItem": {
+      "type": "object",
+      "description": "The Average Rainfall item class",
+      "properties": {
+        "averageRainfall": {
+          "type": "number",
+          "description": "The Average Rainfall value returned",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Rainfall.Responses.SummerRainfallItem": {
+      "type": "object",
+      "properties": {
+        "summerRainfallAverage": {
+          "type": "number",
+          "description": "The Summer Rainfall Average value returned.",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Rainfall.Responses.WinterRainfallItem": {
+      "type": "object",
+      "properties": {
+        "winterRainfallAverage": {
+          "type": "number",
+          "description": "The Winter Rainfall Average value returned.",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Arable": {
+      "type": "object",
+      "properties": {
+        "cropOrder": {
+          "type": "integer",
+          "description": "The order of this crop in the field for the year. If there is only a single crop, then this value must be 1,\r\notherwise it must be 1 or 2 based on the position of the crop during the year.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropGroupId": {
+          "type": "integer",
+          "description": "The crop group id of the crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropTypeId": {
+          "type": "integer",
+          "description": "The crop type id of the crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropInfo1Id": {
+          "type": "integer",
+          "description": "The crop info 1 id of the crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropInfo2Id": {
+          "type": "integer",
+          "description": "The crop info 2 id of the crop in the field. This value is required for arable cereals crops only, for all other crops this value should be null.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "sowingDate": {
+          "type": "string",
+          "description": "The date that the crop in the field was sown.",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "expectedYield": {
+          "type": "number",
+          "description": "The expected yield of the crop in the field, in t/ha. If not provided for crops that require a yield value, then a default value will be used instead.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.DataInput": {
+      "type": "object",
+      "required": [
+        "nutrients",
+        "totals"
+      ],
+      "properties": {
+        "field": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Field"
+        },
+        "nutrients": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Nutrients"
+        },
+        "totals": {
+          "type": "boolean",
+          "description": "Boolean value used to determine whether to include a breakdown of each recommendation value in the returned data set. \r\nTrue: just return total values, False: also include the breakdown values."
+        },
+        "referenceValue": {
+          "type": "string",
+          "description": "Optional reference value to identify a particular call to the endpoint, to aid with debugging.\r\nOnly letters, numbers and the following symbols #:-() are allowed, up to a maximum length of 75 characters.\r\nWe recommend passing in a global unique identifier (GUID). Please do not include any sensitive information.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Field": {
+      "type": "object",
+      "required": [
+        "countryId",
+        "excessWinterRainfall",
+        "excessWinterRainfallManuallyEntered",
+        "fieldType",
+        "harvestYear",
+        "multipleCrops",
+        "rainfallAverage"
+      ],
+      "properties": {
+        "fieldType": {
+          "type": "integer",
+          "description": "The type of field: arable, grass, or both (where there are multiple crops in the field in the same year where one is arable and the other grass).",
+          "format": "int32"
+        },
+        "multipleCrops": {
+          "type": "boolean",
+          "description": "Whether the field has just a single crop grown in the current crop year (false), or multiple crops in the current crop year (true)."
+        },
+        "arable": {
+          "type": "array",
+          "description": "If the field has an arable crop in the current crop year: The arable parameters of the field.\r\nWith multiple crops, it is possible to have more than one arable crop in the same crop year.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Arable"
+          },
+          "x-nullable": true
+        },
+        "grassland": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Grassland"
+        },
+        "grass": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Grass"
+        },
+        "soil": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.Soil"
+        },
+        "harvestYear": {
+          "type": "integer",
+          "description": "The year that the field is harvested in.",
+          "format": "int32"
+        },
+        "rainfallAverage": {
+          "type": "number",
+          "description": "The average annual rainfall on the field, in millimetres.",
+          "format": "double"
+        },
+        "excessWinterRainfall": {
+          "type": "number",
+          "description": "The excess winter rainfall on the field, in millimetres.",
+          "format": "double"
+        },
+        "excessWinterRainfallManuallyEntered": {
+          "type": "boolean",
+          "description": "Set this value to true if the ExcessWinterRainfall value has been manually entered by the user. \r\nIf the ExcessWinterRainfall value provided has been calculated from a postcode lookup, then this value should be set to false."
+        },
+        "mannerManures": {
+          "type": "boolean",
+          "description": "If you want to provide outputs calculated from Manner, this should be set to true, if you want to provide values to calculate organic materials from RB209 section 2,\r\nor you want to provide neither, then this should be set to false. If no value is provided, this will default to false.",
+          "x-nullable": true
+        },
+        "organicMaterials": {
+          "type": "array",
+          "description": "Details of any organic materials applied to the field for the current crop.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.OrganicMaterials"
+          },
+          "x-nullable": true
+        },
+        "mannerOutputs": {
+          "type": "array",
+          "description": "Manner outputs data.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.MannerOutputs"
+          },
+          "x-nullable": true
+        },
+        "previousCropping": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.PreviousCropping"
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "The country that the field is in.",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.FreshWeightYieldItem": {
+      "type": "object",
+      "description": "Fresh weight yield item for Scotland fields with specific sward types",
+      "properties": {
+        "position": {
+          "type": "integer",
+          "description": "The position in the sequence - note: all items in the defoliation sequence need to be provided here, including an establishment item if relevant.",
+          "format": "int32"
+        },
+        "freshWeightYield": {
+          "type": "number",
+          "description": "The fresh weight yield of the item in the defoliation sequence. If the item is an establishment item, then the yield value should be set to null.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Grass": {
+      "type": "object",
+      "description": "New functionality replacing the legacy Grassland inputs: If the field has a grassland crop in the current crop year: The grassland parameters of the field.",
+      "properties": {
+        "cropOrder": {
+          "type": "integer",
+          "description": "The order of this crop in the field for the year. If there is only a single crop, then this value must be 1,\r\notherwise it must be 1 or 2 based on the position of the crop during the year.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "swardTypeId": {
+          "type": "integer",
+          "description": "The sward type id of the grass crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "swardManagementId": {
+          "type": "integer",
+          "description": "The sward management id of the grass crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "defoliationSequenceId": {
+          "type": "integer",
+          "description": "The defoliation sequence id of the grass crop in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "grassGrowthClassId": {
+          "type": "integer",
+          "description": "The grass growth class (GGC) id of the grass crop in the field - for England & Wales fields.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "siteClassId": {
+          "type": "integer",
+          "description": "The site class id of the grass crop in the field - for Scottish fields.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "yield": {
+          "type": "integer",
+          "description": "For England & Wales fields, as well as Scotland fields where the sward type is 'grass with low clover', the dry matter yield (whole number) across the whole grass crop in the field. \r\nIf you are providing a value for this, the values for 'freshWeightYield' should not be provided.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "freshWeightYields": {
+          "type": "array",
+          "description": "For Scotland fields only, where the sward type is either 'grass with high clover' or 'red clover', the fresh weight yield of the field should be split across the defoliations of the grass crop in the field. If you are providing values for this, the value for 'yield' should not be provided.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.FreshWeightYieldItem"
+          },
+          "x-nullable": true
+        },
+        "seasonId": {
+          "type": "integer",
+          "description": "If the first item in the grass sequence is an establishment, then the id of whether this is an autumn or spring establishment. If there is no establishment, then the id of none.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Grassland": {
+      "type": "object",
+      "description": "Legacy functionality, for Grassland fields use the new Grass section. See below.",
+      "properties": {
+        "cropOrder": {
+          "type": "integer",
+          "description": "The order of this crop in the field for the year. If there is only a single crop, then this value must be 1,\r\notherwise it must be 1 or 2 based on the position of the crop during the year.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "snsId": {
+          "type": "integer",
+          "description": "The grassland SNS status value.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "grassGrowthClassId": {
+          "type": "integer",
+          "description": "The grass growth class (GGC) value.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "yieldTypeId": {
+          "type": "integer",
+          "description": "Whether yields are reported as fresh weight or dry matter.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "sequenceId": {
+          "type": "integer",
+          "description": "The sequence of the grassland in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "grasslandSequence": {
+          "type": "array",
+          "description": "The sequence of grassland cuts.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.GrasslandSequence"
+          },
+          "x-nullable": true
+        },
+        "establishedDate": {
+          "type": "string",
+          "description": "The date that grassland was established for the field.",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "seasonId": {
+          "type": "integer",
+          "description": "If the first item in the grassland sequence is establishment, then whether this is an autumn or spring establishment.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "siteClassId": {
+          "type": "integer",
+          "description": "The id of the site class for Scottish fields, only required for Scottish fields. For England and Wales fields, set to null.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.GrasslandSequence": {
+      "type": "object",
+      "properties": {
+        "position": {
+          "type": "integer",
+          "description": "The position in the sequence of the cut.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "cropMaterialId": {
+          "type": "integer",
+          "description": "The crop material id used for the Cut.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "yield": {
+          "type": "number",
+          "description": "The yield of the cut.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.MannerOutputs": {
+      "type": "object",
+      "description": "Manner Outputs.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The crop order that the manner outputs values are for.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "defoliationId": {
+          "type": "integer",
+          "description": "The defoliation that the manner outputs values are for. For arable crops,\r\nthis value should always be 1. For grass crops,\r\nthis value should match up with the defoliation that the application is applied to.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "totalN": {
+          "type": "integer",
+          "description": "Total value of nitrogen from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "availableN": {
+          "type": "integer",
+          "description": "Available value of nitrogen from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "totalP": {
+          "type": "integer",
+          "description": "Total value of phosphate from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "availableP": {
+          "type": "integer",
+          "description": "Available value of phosphate from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "totalK": {
+          "type": "integer",
+          "description": "Total value of potash from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "availableK": {
+          "type": "integer",
+          "description": "Available value of potash from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "totalS": {
+          "type": "integer",
+          "description": "Total value of sulphur from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "availableS": {
+          "type": "integer",
+          "description": "Available value of sulphur from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "totalM": {
+          "type": "integer",
+          "description": "Total value of magnesium from manner outputs.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Nutrients": {
+      "type": "object",
+      "required": [
+        "lime",
+        "magnesium",
+        "nitrogen",
+        "phosphate",
+        "potash",
+        "sodium",
+        "sulphur"
+      ],
+      "properties": {
+        "nitrogen": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for nitrogen (N)."
+        },
+        "phosphate": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for phosphate (P<sub>2</sub>O<sub>5</sub>)."
+        },
+        "potash": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for potash (K<sub>2</sub>O)."
+        },
+        "magnesium": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for magnesium (MgO)."
+        },
+        "sodium": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for sodium (Na<sub>2</sub>O)."
+        },
+        "sulphur": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for sulphur (SO<sub>3</sub>)."
+        },
+        "lime": {
+          "type": "boolean",
+          "description": "Whether to calculate recommendations for lime."
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.OrganicMaterials": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "The crop order that the organic material values are for.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "defoliationId": {
+          "type": "integer",
+          "description": "The defoliation that the organic materials values are for. For arable crops, this value should always be 1.\r\nFor grass crops, this value should match up with the defoliation that the application is applied to.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "materialId": {
+          "type": "integer",
+          "description": "The id of the material that was applied.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "incorporationMethodId": {
+          "type": "integer",
+          "description": "The id of how the application was incorporated to the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "applicationDate": {
+          "type": "string",
+          "description": "The date that the material was applied to the field.",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "applicationRate": {
+          "type": "number",
+          "description": "The rate that the material was applied to the field, in tonnes.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "nitrogen": {
+          "type": "number",
+          "description": "Nitrogen total value from lab analysis kg/tonne.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "phosphate": {
+          "type": "number",
+          "description": "Phosphate total value from lab analysis kg/tonne.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "potash": {
+          "type": "number",
+          "description": "Potash total value from lab analysis kg/tonne.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "magnesium": {
+          "type": "number",
+          "description": "Magnesium total value from lab analysis kg/tonne.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "sulphur": {
+          "type": "number",
+          "description": "Sulphur total value from lab analysis kg/tonne.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.PKBalance": {
+      "type": "object",
+      "description": "Phosphate and potash balances carried over from the previous crop year.",
+      "properties": {
+        "phosphate": {
+          "type": "integer",
+          "description": "The balance of phosphate carried over from the previous crop year. This value is optional, whole numbers only.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "potash": {
+          "type": "integer",
+          "description": "The balance of potash carried over from the previous crop year. This value is optional, whole numbers only.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.PreviousCropping": {
+      "type": "object",
+      "description": "Previous cropping class - contains all elements related to previous cropping.",
+      "properties": {
+        "previousGrassId": {
+          "type": "integer",
+          "description": "The previous grass id of the ploughing out of grass leys. Required for arable fields where there has previously been grass within the past three years.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "previousCropGroupId": {
+          "type": "integer",
+          "description": "The crop group id of the previous crop. Required for arable fields where the previous crop was arable.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "previousCropTypeId": {
+          "type": "integer",
+          "description": "The crop type id of the previous crop. Required for arable fields where the previous crop was arable.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "grassHistoryId": {
+          "type": "integer",
+          "description": "The grass history id of the field. Required for grass fields.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "smnDepth": {
+          "type": "integer",
+          "description": "Measured smn depth for the previous cropping, only required for Scottish fields. For England and Wales fields, set to null.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "measuredSmn": {
+          "type": "integer",
+          "description": "Measured min smn depth for the previous cropping, only required for Scottish fields. For England and Wales fields, set to null.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.Soil": {
+      "type": "object",
+      "properties": {
+        "soilTypeId": {
+          "type": "integer",
+          "description": "The soil type id of the soil in the field.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "kReleasingClay": {
+          "type": "boolean",
+          "description": "Most heavy clay soils can release natural potash for crop uptake. Other soil types will not be K releasing.",
+          "x-nullable": true
+        },
+        "nvzActionProgrammeId": {
+          "type": "integer",
+          "description": "Whether the field is located in one of the NVZ designated areas.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "psc": {
+          "type": "integer",
+          "description": "Soil phosphorus sorption capacity, only required for Scottish fields. For England and Wales fields, set to null.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pkBalance": {
+          "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.PKBalance"
+        },
+        "soilAnalyses": {
+          "type": "array",
+          "description": "List of analyses on the soil of the field.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Requests.SoilAnalysis"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Requests.SoilAnalysis": {
+      "type": "object",
+      "properties": {
+        "soilAnalysisDate": {
+          "type": "string",
+          "description": "The date that the soil analysis was carried out.",
+          "format": "date-time",
+          "x-nullable": true
+        },
+        "soilpH": {
+          "type": "number",
+          "description": "The pH of the soil in the field.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "sulphurDeficient": {
+          "type": "boolean",
+          "description": "Whether the soil in the field is sulphur deficient or not.",
+          "x-nullable": true
+        },
+        "snsIndexId": {
+          "type": "integer",
+          "description": "Nitrogen index id of the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "snsMethodologyId": {
+          "type": "integer",
+          "description": "Nitrogen methodology id used in the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "snsCropOrder": {
+          "type": "integer",
+          "description": "The crop order that the snsIndexId value is related to.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pIndexId": {
+          "type": "integer",
+          "description": "Phosphate index id of the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "pMethodologyId": {
+          "type": "integer",
+          "description": "Phosphate methodology id used in the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "kIndexId": {
+          "type": "integer",
+          "description": "Potash index id of the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "kMethodologyId": {
+          "type": "integer",
+          "description": "Potash methodology id used in the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "mgIndexId": {
+          "type": "integer",
+          "description": "Magnesium index id of the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "mgMethodologyId": {
+          "type": "integer",
+          "description": "Magnesium methodology id used in the soil analysis.",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Responses.AdviceNotes": {
+      "type": "object",
+      "description": "Details of advice notes.",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "The id of the nutrient that the advice note relates to.",
+          "format": "int32"
+        },
+        "sequenceId": {
+          "type": "integer",
+          "description": "The sequence value through the crop year that the advice note is for. This matches the sequenceId of the relevant crop in the Calculations section.",
+          "format": "int32"
+        },
+        "note": {
+          "type": "string",
+          "description": "The text of the advice note.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Responses.Calculations": {
+      "type": "object",
+      "description": "Recommendation calculations.",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "The id of the nutrient.",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Whether this is an arable & horticulture (A) or grassland (G) crop."
+        },
+        "sequenceId": {
+          "type": "integer",
+          "description": "The sequence value through the crop year of the crop.",
+          "format": "int32"
+        },
+        "defoliationId": {
+          "type": "integer",
+          "description": "The defoliation sequence id. For a grassland crop, this will be a value between 1 and the total number of items in the defoliation sequence.\r\nFor an arable crop, this will always be 1.",
+          "format": "int32"
+        },
+        "indexpH": {
+          "type": "string",
+          "description": "The soil index value for the nutrient (where: nitrogen, phosphate, potash, magnesium), or the pH level of the soil (where: lime).",
+          "x-nullable": true
+        },
+        "recommendation": {
+          "type": "number",
+          "description": "The recommended crop nutrient requirement for the nutrient.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "manures": {
+          "type": "number",
+          "description": "The volume of manures applied to the field for the nutrient.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "pkBalance": {
+          "type": "number",
+          "description": "The balance of potash in the soil for the nutrient.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "cropNeed": {
+          "type": "number",
+          "description": "The crop need required for the nutrient, taking into account the recommended value and any materials applied.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "breakdown": {
+          "type": "boolean",
+          "description": "Whether the item is a total value (true), or a constituent part (false)."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the recommendation for the breakdown. For a total item, this will be 'Total'.",
+          "x-nullable": true
+        },
+        "snsStatus": {
+          "type": "string",
+          "description": "The value of the nutrient SNS status. The default is null. This is only populated if the nutrient is nitrogen and the field is grassland.",
+          "x-nullable": true
+        },
+        "totalAvailable": {
+          "type": "array",
+          "description": "The total and available volumes of the nutrient supplied by the application.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Responses.TotalAvailable"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Responses.DataOutput": {
+      "type": "object",
+      "description": "Data output calls - contains elements of the recommendation data output.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "calculations": {
+          "type": "array",
+          "description": "Details of the recommendation calculations.",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Responses.Calculations"
+          },
+          "x-nullable": true
+        },
+        "adviceNotes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Recommendation.Responses.AdviceNotes"
+          },
+          "x-nullable": true
+        },
+        "referenceValue": {
+          "type": "string",
+          "description": "The user reference value passed in as part of the request data.",
+          "x-nullable": true
+        },
+        "versionNumber": {
+          "type": "string",
+          "description": "The version number of the API that performed the calculations.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Responses.LeafAnalysisResponse": {
+      "type": "object",
+      "description": "Leaf analysis response class",
+      "properties": {
+        "minRange": {
+          "type": "number",
+          "description": "Nutrient Minimum range",
+          "format": "double"
+        },
+        "maxRange": {
+          "type": "number",
+          "description": "Nutrient Maximum range",
+          "format": "double"
+        },
+        "nutrientDeficient": {
+          "type": "boolean",
+          "description": "Is Nutrient deficient"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Recommendation.Responses.TotalAvailable": {
+      "type": "object",
+      "description": "The total and available volumes of the nutrient supplied by the application.",
+      "properties": {
+        "total": {
+          "type": "number",
+          "description": "The total volume of the nutrient supplied by the application.",
+          "format": "double",
+          "x-nullable": true
+        },
+        "available": {
+          "type": "number",
+          "description": "The available volume of the nutrient supplied by the application.",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.GetNvzList": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "nvzResponse": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.GetNvzResponse"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.GetNvzResponse": {
+      "type": "object",
+      "description": "NVZ Response Class - contains all elements which relate to NVZ Response.",
+      "properties": {
+        "nvzId": {
+          "type": "integer",
+          "description": "The ID value for a NVZ (Nitrate Vulnerable Zones) item",
+          "format": "int32"
+        },
+        "nvzName": {
+          "type": "string",
+          "description": "The Text value for a NVZ (Nitrate Vulnerable Zones) item",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.GetPscResponse": {
+      "type": "object",
+      "description": "PSC Response Class - contains all elements which relate to PSC Response.",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "psc": {
+          "type": "integer",
+          "description": "The ID for PSC (P Sortion Capacity)",
+          "format": "int32"
+        },
+        "soilIndexId": {
+          "type": "integer",
+          "description": "The Soil Index ID",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.GetSoilPhLevel": {
+      "type": "object",
+      "description": "Soil Ph Level Class - contains all elements which relate to Soil Ph Level.",
+      "properties": {
+        "soilPh": {
+          "type": "number",
+          "description": "SoilPh value",
+          "format": "double",
+          "x-nullable": true
+        },
+        "fieldType": {
+          "type": "string",
+          "description": "Field Type",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.MethodologyItemResponse": {
+      "type": "object",
+      "description": "Methodology Item Class - contains all elements which relate to Methodology Item.",
+      "properties": {
+        "methodology": {
+          "type": "string",
+          "description": "Methodology Name",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.MethodologyResponse": {
+      "type": "object",
+      "description": "Methodology Class - contains all elements which relate to Methodology.",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "ID of the Nutrient",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "methodologyId": {
+          "type": "integer",
+          "description": "Methodology ID",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "methodology": {
+          "type": "string",
+          "description": "Methodology Name",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientIndexIdFromValue": {
+      "type": "object",
+      "description": "Nutrient Index ID Class - contains all elements which relate to  Nutrient Index ID.",
+      "properties": {
+        "indexId": {
+          "type": "integer",
+          "description": "Index ID of the Nutrient",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientIndexItemResponse": {
+      "type": "object",
+      "description": "Nutrient Index Item Class - contains all elements which relate to  Nutrient Index Item.",
+      "properties": {
+        "index": {
+          "type": "string",
+          "description": "Name of the Nutrient Index",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientIndexResponse": {
+      "type": "object",
+      "description": "Nutrient Index Class - contains all elements which relate to  Nutrient Index.",
+      "properties": {
+        "index": {
+          "type": "string",
+          "description": "Name of the Nutrient Index",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientIndexesResponse": {
+      "type": "object",
+      "description": "Nutrient Indexes Response Class - contains all elements which relate to nutrient indexes across nutrients.",
+      "properties": {
+        "nutrientId": {
+          "type": "integer",
+          "description": "Nutrient ID",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "methodologyId": {
+          "type": "integer",
+          "description": "Methodology ID",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "indexId": {
+          "type": "integer",
+          "description": "Index ID",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "index": {
+          "type": "string",
+          "description": "Index - the index value (e.g. \"VL\", \"L\", \"0\", \"1\", etc.)",
+          "x-nullable": true
+        },
+        "indexText": {
+          "type": "string",
+          "description": "Index Text - combination of SoilStatusName and IndexId in format \"[SoilStatusName] ([IndexId])\"",
+          "x-nullable": true
+        },
+        "minRange": {
+          "type": "number",
+          "description": "Minimum range of Soil Index",
+          "format": "double",
+          "x-nullable": true
+        },
+        "maxRange": {
+          "type": "number",
+          "description": "Maximum range of Soil Index",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientIndicesResponse": {
+      "type": "object",
+      "description": "Nutrient Indices Class - contains all elements which relate to  Nutrient Indices.",
+      "properties": {
+        "indexId": {
+          "type": "integer",
+          "description": "Index ID of the Nutrient",
+          "format": "int32",
+          "x-nullable": true
+        },
+        "index": {
+          "type": "string",
+          "description": "Name of the Nutrient Index",
+          "x-nullable": true
+        },
+        "minRange": {
+          "type": "number",
+          "description": "Minimum range of Soil Index",
+          "format": "double",
+          "x-nullable": true
+        },
+        "maxRange": {
+          "type": "number",
+          "description": "Maximum range of Soil Index",
+          "format": "double",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.NutrientTargetIndexId": {
+      "type": "object",
+      "description": "Nutrient Target Index Class - contains all elements which relate to  Nutrient Target Index.",
+      "properties": {
+        "indexId": {
+          "type": "string",
+          "description": "Index ID of the Nutrient",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.PscDetail": {
+      "type": "object",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "getPscResponses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RB209Models.RB209WebApi.Soil.Responses.GetPscResponse"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.SoilTypeItemResponse": {
+      "type": "object",
+      "description": "Soil Type Item Class - contains all elements which relate to Soil type Item.",
+      "properties": {
+        "soilType": {
+          "type": "string",
+          "description": "Name of the Soil Type",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.Soil.Responses.SoilTypeResponse": {
+      "type": "object",
+      "description": "Soil Type Class - contains all elements which relate to Soil type.",
+      "properties": {
+        "soilTypeId": {
+          "type": "integer",
+          "description": "ID of the Soil Type",
+          "format": "int32"
+        },
+        "soilType": {
+          "type": "string",
+          "description": "Name of the Soil Type",
+          "x-nullable": true
+        },
+        "kReleasingClay": {
+          "type": "boolean",
+          "description": "Whether K releasing Clay?",
+          "x-nullable": true
+        },
+        "countryId": {
+          "type": "integer",
+          "description": "ID of the Country",
+          "format": "int32",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.User.Requests.LoginRequest": {
+      "type": "object",
+      "description": "Login Request",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email Address to login",
+          "x-nullable": true
+        },
+        "password": {
+          "type": "string",
+          "description": "The Password to login",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.User.Requests.RefreshTokenRequest": {
+      "type": "object",
+      "description": "Refresh Token Request",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "Email address to refresh the token",
+          "x-nullable": true
+        },
+        "refreshToken": {
+          "type": "string",
+          "description": "The Refresh Token",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.User.Responses.LogoutResponse": {
+      "type": "object",
+      "description": "The Log out response",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "RB209Models.RB209WebApi.User.Responses.TokenResponse": {
+      "type": "object",
+      "description": "Token Response",
+      "properties": {
+        "errorCode": {
+          "type": "string",
+          "description": "If an error occurs, the code relating to it.",
+          "x-nullable": true
+        },
+        "error": {
+          "type": "string",
+          "description": "If an error occurs, the message relating to it.",
+          "x-nullable": true
+        },
+        "accessToken": {
+          "type": "string",
+          "description": "Access Token Information",
+          "x-nullable": true
+        },
+        "refreshToken": {
+          "type": "string",
+          "description": "Refresh Token Information",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Enter the Bearer Authorization string as following: `Bearer [Generated-JWT-Token]`. <br />Valid tokens can be generated by using the /api/users/login or /api/users/refresh_token endpoints."
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "AdviceNote",
+      "description": "– The list of all available endpoints relating to advice note."
+    },
+    {
+      "name": "Arable",
+      "description": "– The list of all available endpoints relating to arable."
+    },
+    {
+      "name": "FertiliserPrices",
+      "description": "– The list of all available endpoints relating to fertiliser prices."
+    },
+    {
+      "name": "Field",
+      "description": "– The list of all available endpoints relating to field."
+    },
+    {
+      "name": "Grass",
+      "description": "– New functionality replacing the legacy Grassland section: The list of all available endpoints relating to grass."
+    },
+    {
+      "name": "Measurement",
+      "description": "– The list of all available endpoints relating to measurement in England and Wales."
+    },
+    {
+      "name": "MeasurementScotland",
+      "description": "– The list of all available endpoints relating to measurement in Scotland."
+    },
+    {
+      "name": "OrganicMaterial",
+      "description": "– The list of all available endpoints relating to organic material."
+    },
+    {
+      "name": "PreviousCropping",
+      "description": "– The list of all available endpoints relating to previous cropping."
+    },
+    {
+      "name": "Rainfall",
+      "description": "– The list of all available endpoints relating to rainfall."
+    },
+    {
+      "name": "Recommendation",
+      "description": "– The list of all available endpoints relating to recommendations."
+    },
+    {
+      "name": "Soil",
+      "description": "– The list of all available endpoints relating to soil."
+    },
+    {
+      "name": "Users",
+      "description": "– The list of all available endpoints relating to user."
+    }
+  ]
+}
