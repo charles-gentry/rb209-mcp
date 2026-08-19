@@ -1,0 +1,9 @@
+node_modules/
+dist/
+build/
+*.mcpb
+.env
+.env.*
+*.log
+coverage/
+.DS_Store
