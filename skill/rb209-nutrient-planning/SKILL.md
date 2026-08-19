@@ -237,11 +237,18 @@ affected nutrient's Total row gains a `manures` value (available nutrient) and a
 − manures`**. In the verified example the slurry supplied 20 kg N, 18 kg P₂O₅,
 68 kg K₂O available, dropping N cropNeed from 200 to 180.
 
-For a **lab analysis** of the manure, add per-unit nutrient values to the same
-entry to override the material defaults: `"nitrogen": 2.0, "phosphate": 1.1,
-"potash": 3.4, "sulphur": 0.7, "magnesium": 0.6`.
+For a **lab analysis** of the manure (verified;
+`test/fixtures/RecommendationsLabInput.json`), add per-unit nutrient values to
+the same entry to override the material defaults: `"nitrogen": 2.0,
+"phosphate": 1.1, "potash": 3.4, "sulphur": 0.7, "magnesium": 0.6`. The engine
+uses these instead of the material's book values (in the verified example the K
+lab value lifted available K₂O to 92, dropping K cropNeed to 53).
 
-### MANNER-NPK outputs (optional) — set `mannerManures: true`, add to `field.mannerOutputs`
+### MANNER-NPK outputs (optional, verified) — set `mannerManures: true`, add to `field.mannerOutputs`
+
+Verified end-to-end; full payload at `test/fixtures/RecommendationsMannerInput.json`.
+You supply the total/available N-P-K-S values (e.g. from MANNER-NPK software)
+directly, and they credit against crop need the same way organic materials do:
 
 ```json
 { "id": "1", "defoliationId": "1", "totalN": 80, "availableN": 20,
@@ -309,6 +316,8 @@ splits, any "new soil analysis needed" flags).
   - arable — `test/fixtures/RecommendationsSampleInput.json` / `RecommendationsSample.json`
   - grass — `test/fixtures/RecommendationsGrassInput.json` / `RecommendationsGrassSample.json`
   - organic materials — `test/fixtures/RecommendationsOrganicInput.json` / `RecommendationsOrganicSample.json`
+  - MANNER outputs — `test/fixtures/RecommendationsMannerInput.json` / `RecommendationsMannerSample.json`
+  - manure lab analysis — `test/fixtures/RecommendationsLabInput.json` / `RecommendationsLabSample.json`
 - **AHDB worked examples** (Arable, Grass, Organic Materials, MANNER Outputs,
   Lab Analysis, Measurement): <https://rb209.ahdb.org.uk/Home/WorkedExamples>.
   When copying one, add `"grassland": {}` for the current API build.
