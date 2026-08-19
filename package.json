@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "type": "module",
   "bin": { "rb209-mcp": "dist/index.js" },
+  "engines": { "node": ">=20" },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",

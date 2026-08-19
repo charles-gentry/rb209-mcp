@@ -58,4 +58,16 @@ describe("Rb209Client", () => {
       expect((e as RateLimitError).retryAfterSeconds).toBe(42);
     }
   });
+
+  it("falls back to 600s when RateLimit-Reset header is missing", async () => {
+    server.use(http.get(`${BASE}/api/Soil/SoilTypes`, () =>
+      new HttpResponse("You have made too many requests", { status: 429 })));
+    try {
+      await makeClient().request({ method: "get", path: "/api/Soil/SoilTypes" });
+      throw new Error("should have thrown");
+    } catch (e) {
+      expect(e).toBeInstanceOf(RateLimitError);
+      expect((e as RateLimitError).retryAfterSeconds).toBe(600);
+    }
+  });
 });

@@ -30,11 +30,9 @@ export class Rb209Client {
     }
 
     if (res.status === 429) {
-      const reset = Number(res.headers.get("RateLimit-Reset") ?? "600");
-      throw new RateLimitError(
-        `RB209 rate limit reached; retry after ${reset}s`,
-        Number.isFinite(reset) ? reset : 600,
-      );
+      const parsed = Number(res.headers.get("RateLimit-Reset"));
+      const reset = Number.isFinite(parsed) && parsed > 0 ? parsed : 600;
+      throw new RateLimitError(`RB209 rate limit reached; retry after ${reset}s`, reset);
     }
 
     if (!res.ok) {

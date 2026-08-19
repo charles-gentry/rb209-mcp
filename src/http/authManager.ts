@@ -12,15 +12,24 @@ interface TokenPair {
 export class AuthManager {
   private accessToken: string | null = null;
   private refreshToken: string | null = null;
+  private pending: Promise<string> | null = null;
 
   constructor(private readonly opts: AuthOptions) {}
 
   async getAccessToken(): Promise<string> {
     if (this.accessToken) return this.accessToken;
-    return this.login();
+    if (this.pending) return this.pending;
+    this.pending = this.login().finally(() => { this.pending = null; });
+    return this.pending;
   }
 
   async refresh(): Promise<string> {
+    if (this.pending) return this.pending;
+    this.pending = this.doRefresh().finally(() => { this.pending = null; });
+    return this.pending;
+  }
+
+  private async doRefresh(): Promise<string> {
     if (this.refreshToken) {
       const res = await fetch(`${this.opts.baseUrl}/api/users/refresh_token`, {
         method: "POST",

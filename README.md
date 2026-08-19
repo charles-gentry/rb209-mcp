@@ -34,6 +34,7 @@ and `env: { RB209_EMAIL, RB209_PASSWORD }`.
 | `RB209_PASSWORD` | yes | — | Your RB209 licence password |
 | `RB209_BASE_URL` | no | `https://rb209api.ahdb.org.uk` | API base URL |
 | `RB209_ENABLED_GROUPS` | no | all | Comma-separated tags to expose (e.g. `Recommendation,Soil`) |
+| `RB209_SPEC_PATH` | no | vendored spec | Only set when running a manually-extracted bundle standalone (the .mcpb manifest wires it automatically) |
 
 ## Development
 

@@ -58,4 +58,19 @@ describe("AuthManager", () => {
     const am = new AuthManager(opts);
     await expect(am.getAccessToken()).rejects.toThrow(/login failed/i);
   });
+
+  it("dedups concurrent cold getAccessToken calls into a single login", async () => {
+    const am = new AuthManager(opts);
+    const [a, b, c] = await Promise.all([am.getAccessToken(), am.getAccessToken(), am.getAccessToken()]);
+    expect(a).toBe("acc-1"); expect(b).toBe("acc-1"); expect(c).toBe("acc-1");
+    expect(loginCount).toBe(1);
+  });
+
+  it("dedups concurrent refresh calls into a single refresh", async () => {
+    const am = new AuthManager(opts);
+    await am.getAccessToken();
+    const [a, b] = await Promise.all([am.refresh(), am.refresh()]);
+    expect(a).toBe(b);
+    expect(refreshCount).toBe(1);
+  });
 });
