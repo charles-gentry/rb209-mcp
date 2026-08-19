@@ -7,7 +7,7 @@
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "bundle": "node --loader tsx scripts/build-bundle.ts"
+    "bundle": "tsx scripts/build-bundle.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
