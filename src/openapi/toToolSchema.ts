@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import type { SwaggerDoc, Operation, JsonSchema, SwaggerParam } from "./types.js";
 import { inlineSchema } from "./resolveRef.js";
+import { listOperations } from "./loadSpec.js";
 
 export interface ToolDef {
   name: string;
@@ -46,7 +47,7 @@ export function toToolDef(doc: SwaggerDoc, op: Operation): ToolDef {
       properties[p.name] = paramSchema(p);
     } else if (p.in === "body" && p.schema) {
       properties.body = inlineSchema(doc, p.schema);
-      if (p.required) required.push("body");
+      required.push("body");
     }
   }
 
@@ -61,25 +62,15 @@ export function toToolDef(doc: SwaggerDoc, op: Operation): ToolDef {
 }
 
 export function buildToolDefs(doc: SwaggerDoc): ToolDef[] {
-  const ops: Operation[] = [];
-  for (const [path, methods] of Object.entries(doc.paths)) {
-    for (const [method, op] of Object.entries(methods)) {
-      if (method !== "get" && method !== "post") continue;
-      ops.push({
-        method,
-        path,
-        tag: op.tags?.[0] ?? "Default",
-        summary: op.summary ?? "",
-        parameters: op.parameters ?? [],
-      });
-    }
-  }
+  const ops = listOperations(doc);
   const defs = ops.map((op) => toToolDef(doc, op));
-  const counts = new Map<string, number>();
+  const used = new Set<string>();
   for (const d of defs) {
-    const n = counts.get(d.name) ?? 0;
-    counts.set(d.name, n + 1);
-    if (n > 0) d.name = `${d.name}_${n + 1}`;
+    let name = d.name;
+    let n = 2;
+    while (used.has(name)) name = `${d.name}_${n++}`;
+    used.add(name);
+    d.name = name;
   }
   return defs;
 }

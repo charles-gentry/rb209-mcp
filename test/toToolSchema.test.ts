@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { loadSpec, listOperations } from "../src/openapi/loadSpec.js";
 import { toolName, toToolDef, buildToolDefs } from "../src/openapi/toToolSchema.js";
-import type { Operation } from "../src/openapi/types.js";
+import type { Operation, SwaggerDoc } from "../src/openapi/types.js";
 
 const doc = loadSpec();
 const ops = listOperations(doc);
@@ -38,6 +38,18 @@ describe("toToolDef", () => {
     expect(body.properties.field.properties.soil.properties.soilTypeId.type).toBe("integer");
     expect(JSON.stringify(def.inputSchema)).not.toContain("$ref");
   });
+
+  it("always requires `body` on operations with a body param, regardless of the spec's required flag", () => {
+    const def = toToolDef(doc, find("/api/Recommendation/Recommendations", "post"));
+    expect(def.inputSchema.required).toContain("body");
+  });
+
+  it("does not require query params", () => {
+    const op = ops.find((o) => o.parameters.some((p) => p.in === "query"))!;
+    const queryParam = op.parameters.find((p) => p.in === "query")!;
+    const def = toToolDef(doc, op);
+    expect(def.inputSchema.required ?? []).not.toContain(queryParam.name);
+  });
 });
 
 describe("buildToolDefs", () => {
@@ -45,5 +57,38 @@ describe("buildToolDefs", () => {
     const defs = buildToolDefs(doc);
     expect(defs.length).toBe(97);
     expect(new Set(defs.map((d) => d.name)).size).toBe(97);
+  });
+
+  it("guarantees unique names even when a naive `_2` suffix would already collide", () => {
+    // op A ("/api/Foo/Bar") derives base name "rb209_foo_bar".
+    // op B ("/api/Foo/Bar_2") *naturally* derives "rb209_foo_bar_2" —
+    // no collision involved, it just happens to look like a suffixed name.
+    // op C ("/api/Foo/bar") also derives "rb209_foo_bar", colliding with A.
+    //
+    // A naive counter-based dedupe (bump-on-collision using a running
+    // count keyed by original name) would resolve C's collision by
+    // appending "_2", producing a duplicate of B's already-existing
+    // "rb209_foo_bar_2". The used-set approach must detect that "_2" is
+    // taken and walk forward to "_3".
+    const syntheticDoc: SwaggerDoc = {
+      swagger: "2.0",
+      paths: {
+        "/api/Foo/Bar": {
+          get: { tags: ["Foo"], summary: "first", parameters: [] },
+        },
+        "/api/Foo/Bar_2": {
+          get: { tags: ["Foo"], summary: "second", parameters: [] },
+        },
+        "/api/Foo/bar": {
+          get: { tags: ["Foo"], summary: "third", parameters: [] },
+        },
+      },
+      definitions: {},
+    };
+    const defs = buildToolDefs(syntheticDoc);
+    const names = defs.map((d) => d.name);
+    expect(names).toContain("rb209_foo_bar");
+    expect(names).toContain("rb209_foo_bar_2");
+    expect(new Set(names).size).toBe(names.length);
   });
 });
