@@ -1,0 +1,78 @@
+{
+  "field": {
+    "fieldType": 1,
+    "multipleCrops": false,
+    "arable": [
+      {
+        "cropOrder": 1,
+        "cropGroupId": 0,
+        "cropTypeId": 1,
+        "cropInfo1Id": 1,
+        "cropInfo2Id": 1,
+        "sowingDate": "2025-09-01T00:00:00",
+        "expectedYield": 8.0
+      }
+    ],
+    "grassland": {},
+    "grass": {},
+    "soil": {
+      "soilTypeId": 2,
+      "nvzActionProgrammeId": 1,
+      "soilAnalyses": [
+        {
+          "soilAnalysisDate": "2026-02-01T00:00:00",
+          "soilPh": 6.5,
+          "sulphurDeficient": false,
+          "snsIndexId": null,
+          "snsMethodologyId": null,
+          "snsCropOrder": null,
+          "pIndexId": 1,
+          "pMethodologyId": 1,
+          "kIndexId": 0,
+          "kMethodologyId": 4,
+          "mgIndexId": 2,
+          "mgMethodologyId": 4
+        }
+      ]
+    },
+    "harvestYear": 2026,
+    "rainfallAverage": 650.0,
+    "excessWinterRainfall": 0.0,
+    "excessWinterRainfallManuallyEntered": false,
+    "mannerManures": true,
+    "organicMaterials": [],
+    "mannerOutputs": [
+      {
+        "id": "1",
+        "defoliationId": "1",
+        "totalN": 80,
+        "availableN": 20,
+        "totalP": 35,
+        "availableP": 25,
+        "totalK": 75,
+        "availableK": 70,
+        "totalM": 15,
+        "totalS": 10,
+        "availableS": 5
+      }
+    ],
+    "previousCropping": {
+      "previousGrassId": 1,
+      "previousCropGroupId": 0,
+      "previousCropTypeId": 0,
+      "grassHistoryId": null
+    },
+    "countryId": 1
+  },
+  "nutrients": {
+    "nitrogen": true,
+    "phosphate": true,
+    "potash": true,
+    "magnesium": true,
+    "sodium": true,
+    "sulphur": true,
+    "lime": true
+  },
+  "totals": false,
+  "referenceValue": "Manner outputs example"
+}
