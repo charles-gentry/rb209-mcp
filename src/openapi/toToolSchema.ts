@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import type { SwaggerDoc, Operation, JsonSchema, SwaggerParam } from "./types.js";
 import { inlineSchema } from "./resolveRef.js";
 import { listOperations } from "./loadSpec.js";
+import { guidanceFor } from "../toolGuidance.js";
 
 export interface ToolDef {
   name: string;
@@ -54,9 +55,11 @@ export function toToolDef(doc: SwaggerDoc, op: Operation): ToolDef {
   const inputSchema: JsonSchema = { type: "object", properties };
   if (required.length) inputSchema.required = required;
 
+  const guidance = guidanceFor(op);
   const desc =
     `${op.method.toUpperCase()} ${op.path}` +
-    (op.summary ? ` — ${op.summary}` : "");
+    (op.summary ? ` — ${op.summary}` : "") +
+    (guidance ? ` — ${guidance}` : "");
 
   return { name: toolName(op), description: desc, inputSchema, operation: op };
 }

@@ -5,6 +5,7 @@ import { buildToolDefs, type ToolDef } from "./openapi/toToolSchema.js";
 import { buildRequest } from "./executor.js";
 import { RateLimitError, type Rb209Client } from "./http/client.js";
 import type { Rb209Config } from "./config.js";
+import { SERVER_INSTRUCTIONS } from "./serverInstructions.js";
 
 export function createServer(
   config: Rb209Config,
@@ -19,8 +20,8 @@ export function createServer(
   const byName = new Map(defs.map((d) => [d.name, d]));
 
   const server = new Server(
-    { name: "rb209-mcp", version: "0.2.2" },
-    { capabilities: { tools: {} } },
+    { name: "rb209-mcp", version: "0.2.3" },
+    { capabilities: { tools: {} }, instructions: SERVER_INSTRUCTIONS },
   );
 
   server.setRequestHandler(ListToolsRequestSchema, async () => ({
