@@ -19,7 +19,7 @@ export function createServer(
   const byName = new Map(defs.map((d) => [d.name, d]));
 
   const server = new Server(
-    { name: "rb209-mcp", version: "0.1.0" },
+    { name: "rb209-mcp", version: "0.2.1" },
     { capabilities: { tools: {} } },
   );
 

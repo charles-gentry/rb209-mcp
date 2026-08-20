@@ -16,7 +16,11 @@ await build({
   format: "esm",
   target: "node20",
   banner: { js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);" },
-  outfile: resolve(stage, "dist/index.js"),
+  // Emit as .mjs so Node always treats the bundle as ESM — a plain .js entry
+  // with no package.json only runs on Node ≥20.17 (which auto-detects ESM);
+  // older Node (e.g. Claude Desktop's bundled runtime) defaults to CommonJS
+  // and fails with "Cannot use import statement outside a module".
+  outfile: resolve(stage, "dist/index.mjs"),
 });
 
 cpSync(resolve(root, "spec"), resolve(stage, "spec"), { recursive: true });

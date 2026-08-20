@@ -1,24 +1,31 @@
 {
   "manifest_version": "0.3",
   "name": "rb209-mcp",
-  "version": "0.2.0",
-  "description": "AHDB RB209 (Nutrient Management Guide) Web API v2 \u2014 all endpoints as MCP tools.",
+  "version": "0.2.1",
+  "description": "AHDB RB209 (Nutrient Management Guide) Web API v2 — all endpoints as MCP tools.",
   "author": {
     "name": "charles-gentry"
   },
   "server": {
     "type": "node",
-    "entry_point": "dist/index.js",
+    "entry_point": "dist/index.mjs",
     "mcp_config": {
       "command": "node",
       "args": [
-        "${__dirname}/dist/index.js"
+        "${__dirname}/dist/index.mjs"
       ],
       "env": {
         "RB209_EMAIL": "${user_config.email}",
         "RB209_PASSWORD": "${user_config.password}",
         "RB209_SPEC_PATH": "${__dirname}/spec/swagger.json"
       }
+    }
+  },
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
     }
   },
   "user_config": {
