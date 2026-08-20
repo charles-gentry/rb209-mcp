@@ -1,6 +1,7 @@
 {
   "name": "rb209-mcp",
-  "version": "0.2.4",
+  "version": "0.3.0",
+  "license": "MIT",
   "type": "module",
   "bin": {
     "rb209-mcp": "dist/index.js"
@@ -9,10 +10,11 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "npm run sync-version && tsc -p tsconfig.json",
     "test": "vitest run",
     "test:watch": "vitest",
-    "bundle": "tsx scripts/build-bundle.ts"
+    "bundle": "tsx scripts/build-bundle.ts",
+    "sync-version": "tsx scripts/sync-version.ts"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
