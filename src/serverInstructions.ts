@@ -20,7 +20,7 @@ state the default you propose and get their explicit agreement before proceeding
 
 For an ARABLE field, ask for:
 - Country (England & Wales = 1, Scotland = 2).
-- Location: a postcode (call rb209_rainfall_rainfall_average_by_postcode to get
+- Location: a postcode (call rb209_rainfall_average to get
   rainfallAverage) — or the average annual rainfall in mm if they know it.
   Rainfall changes the N recommendation, so never invent it.
 - Crop, and its END USE (e.g. Feed vs Milling -> cropInfo1Id).

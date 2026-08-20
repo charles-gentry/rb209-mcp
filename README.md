@@ -1,7 +1,11 @@
 # rb209-mcp
 
 MCP server exposing the AHDB **RB209 (Nutrient Management Guide) Web API v2** —
-all 97 endpoints as tools — plus a nutrient-planning skill.
+94 tools — plus a nutrient-planning skill.
+
+The three `Users` auth endpoints (Login / Logout / Refresh_Token) are deliberately
+not exposed: the server manages that token lifecycle itself, so a tool call to
+`Logout` could only ever invalidate its own session.
 
 The extension ships its own usage guidance, so installing the `.mcpb` in Claude Desktop is enough — you don't need to load the skill separately. The server exposes an MCP `instructions` brief on connect, and the highest-risk tools (notably the recommendation endpoint) carry the must-know rules in their tool descriptions. `skill/rb209-nutrient-planning/SKILL.md` remains the fuller guide (for Claude Code / claude.ai and as a versioned release asset); the embedded guidance is a condensed subset kept in sync with it by hand.
 
@@ -54,4 +58,5 @@ npm run test:watch
 RB209_EMAIL=... RB209_PASSWORD=... npm test   # also runs the live integration test
 ```
 
-Licensed API content © AHDB under the Open Government Licence v3.0.
+This server is released under the [MIT Licence](LICENSE). The RB209 data it
+returns is licensed API content © AHDB under the Open Government Licence v3.0.
