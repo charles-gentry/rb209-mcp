@@ -38,7 +38,21 @@ describe("buildRequest", () => {
   it("adds only defined query params", () => {
     const op = ops.find((o) => o.parameters.some((p) => p.in === "query"))!;
     const qp = op.parameters.find((p) => p.in === "query")!;
-    const req = buildRequest(op, { [qp.name]: "x" });
+    const pathArgs = Object.fromEntries(
+      op.parameters.filter((p) => p.in === "path").map((p) => [p.name, 1]),
+    );
+    const req = buildRequest(op, { ...pathArgs, [qp.name]: "x" });
     expect(req.query?.get(qp.name)).toBe("x");
+  });
+
+  it("throws a named error when a required path param is missing", () => {
+    const op = find("/api/Soil/NutrientIndexes/{methodologyId}");
+    expect(() => buildRequest(op, {})).toThrow(/Missing required parameter "methodologyId"/);
+  });
+
+  it("never interpolates the literal 'undefined' into a path", () => {
+    for (const op of ops.filter((o) => o.parameters.some((p) => p.in === "path"))) {
+      expect(() => buildRequest(op, {})).toThrow(/Missing required parameter/);
+    }
   });
 });
