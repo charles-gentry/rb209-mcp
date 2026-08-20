@@ -16,12 +16,23 @@ describe("buildRequest", () => {
     expect(req.path).not.toContain("{");
   });
 
-  it("passes the body through for a POST", () => {
-    const op = find("/api/Recommendation/Recommendations", "post");
-    const body = { field: {}, nutrients: { nitrogen: true } };
+  it("passes the body through unchanged for a non-recommendation POST", () => {
+    const op = find("/api/Recommendation/CalculateNutrientOfftake", "post");
+    const body = { cropTypeId: 0, nutrientId: 1 };
     const req = buildRequest(op, { body });
     expect(req.method).toBe("post");
     expect(req.body).toBe(body);
+  });
+
+  it("fills the required empty crop sections for the recommendation POST", () => {
+    const op = find("/api/Recommendation/Recommendations", "post");
+    const body = { field: { fieldType: 1, arable: [{ cropOrder: 1 }] }, nutrients: { nitrogen: true } };
+    const req = buildRequest(op, { body }) as any;
+    expect(req.body.field.grass).toEqual({});
+    expect(req.body.field.grassland).toEqual({});
+    expect(req.body.field.organicMaterials).toEqual([]);
+    expect(req.body.field.mannerOutputs).toEqual([]);
+    expect(req.body.field.arable).toEqual([{ cropOrder: 1 }]);
   });
 
   it("adds only defined query params", () => {

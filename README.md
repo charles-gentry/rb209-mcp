@@ -3,6 +3,14 @@
 MCP server exposing the AHDB **RB209 (Nutrient Management Guide) Web API v2** —
 all 97 endpoints as tools — plus a nutrient-planning skill.
 
+Tools are a faithful passthrough to the API with one deliberate exception: the
+recommendation endpoint has a footgun where a missing `field.grass` (which the
+API's validation does not report) makes the call fail with the misleading
+`422 "…calculating the crop order"`. For that endpoint only, the server fills
+the incidental required-empty sections (`grass`, `grassland`, `organicMaterials`,
+`mannerOutputs`) when they are absent — never overwriting supplied data, and with
+no effect on the result. See `src/recommendationGuardrail.ts`.
+
 ## Requirements
 
 You need your own AHDB RB209 Web API licence (register at
