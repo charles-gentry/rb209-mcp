@@ -26,6 +26,8 @@ describe("createServer", () => {
     const instructions = client.getInstructions() ?? "";
     expect(instructions).toContain("RB209 nutrient recommendations");
     expect(instructions).toContain("soilAnalyses");
+    expect(instructions).toContain("REQUIRED INPUTS");
+    expect(instructions.toLowerCase()).toContain("rainfall");
   });
 
   it("lists all 97 tools", async () => {

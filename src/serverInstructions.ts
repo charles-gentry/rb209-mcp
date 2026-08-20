@@ -8,18 +8,40 @@ export const SERVER_INSTRUCTIONS = `RB209 nutrient recommendations. Use the rb20
 fertiliser recommendations (N, P2O5, K2O, MgO, SO3, lime) for a UK field.
 
 WORKFLOW
-1. Interview the user for the field's real details — never invent a crop, yield,
-   or soil type; ask short questions for anything missing.
+1. Interview the user and collect EVERY required input below FIRST.
 2. Resolve integer IDs from the lookup tools (don't guess them).
 3. Build the DataInput and call rb209_recommendation_recommendations ONCE.
 4. Read the output and explain it.
 
-INTERVIEW (arable): country (England&Wales=1, Scotland=2); crop; END USE
-(Feed/Milling -> cropInfo1Id); STRAW baled/removed vs incorporated
-(cropInfo2Id 1 vs 2) — this strongly affects K (K2O can roughly halve when straw
-is incorporated), so ALWAYS ask; expected yield; sowing date + harvest year;
-soil type; recent soil analysis (pH, P/K/Mg indices) or none; NVZ; previous crop;
-any organic manures.
+REQUIRED INPUTS — ask the user for ALL of these BEFORE calling the recommendation
+tool, and make NO assumptions. Never silently default a value (rainfall, sowing
+date, yield, straw handling, soil type, etc.). If the user doesn't know one,
+state the default you propose and get their explicit agreement before proceeding.
+
+For an ARABLE field, ask for:
+- Country (England & Wales = 1, Scotland = 2).
+- Location: a postcode (call rb209_rainfall_rainfall_average_by_postcode to get
+  rainfallAverage) — or the average annual rainfall in mm if they know it.
+  Rainfall changes the N recommendation, so never invent it.
+- Crop, and its END USE (e.g. Feed vs Milling -> cropInfo1Id).
+- STRAW: baled/removed (cropInfo2Id = 1) or incorporated (= 2). Strongly affects
+  K (K2O can roughly halve when straw is incorporated) — always ask.
+- Expected yield (t/ha).
+- Sowing/drilling date, and harvest year.
+- Soil type.
+- Soil analysis: pH and the P, K and Mg indices — or "none", in which case send
+  soilAnalyses: [].
+- Whether the field is in an NVZ.
+- The previous crop.
+- Any organic manures/slurries applied (if yes: material, rate, date, incorporation).
+- Which nutrients to advise on (default: all).
+Set excessWinterRainfallManuallyEntered = false and excessWinterRainfall = 0
+unless the user gives a specific excess-winter-rainfall figure; the engine then
+derives it from rainfall and soil.
+
+For a GRASS field, ask instead for: cut for silage / grazed / both, target yield,
+sward type & management, the defoliation (cut/grazing) pattern, season, and
+grass growth class — plus country, soil type, rainfall, NVZ and previous crop.
 
 CRITICAL RULES (avoid wasted/failed calls)
 - ONE recommendation call returns ALL nutrients. Set the nutrients booleans you
