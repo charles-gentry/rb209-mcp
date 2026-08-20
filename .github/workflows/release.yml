@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          # Need the annotated tag object, not just the commit, to read its
-          # subject line for the release title.
-          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -41,9 +37,19 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           # Match the existing release convention, e.g.
-          # "v0.2.4 — ask all inputs, no assumptions". The summary comes from
-          # the annotated tag's subject; a lightweight tag just gets the tag.
-          subject="$(git for-each-ref "refs/tags/$GITHUB_REF_NAME" --format='%(contents:subject)')"
+          # "v0.2.4 — ask all inputs, no assumptions".
+          #
+          # Read the annotation over the API rather than from the checkout:
+          # actions/checkout writes refs/tags/<tag> pointing straight at the
+          # commit, so git's %(contents:subject) silently falls through to the
+          # commit message. That shipped v0.3.0 titled "Merge pull request #15".
+          obj=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$GITHUB_REF_NAME" \
+                  --jq '.object | "\(.type) \(.sha)"')
+          subject=""
+          if [ "${obj%% *}" = "tag" ]; then
+            subject=$(gh api "repos/$GITHUB_REPOSITORY/git/tags/${obj##* }" \
+                        --jq '.message' | head -1)
+          fi
           if [ -n "$subject" ]; then
             title="$GITHUB_REF_NAME — $subject"
           else
