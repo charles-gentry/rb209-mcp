@@ -3,6 +3,8 @@
 MCP server exposing the AHDB **RB209 (Nutrient Management Guide) Web API v2** —
 all 97 endpoints as tools — plus a nutrient-planning skill.
 
+The extension ships its own usage guidance, so installing the `.mcpb` in Claude Desktop is enough — you don't need to load the skill separately. The server exposes an MCP `instructions` brief on connect, and the highest-risk tools (notably the recommendation endpoint) carry the must-know rules in their tool descriptions. `skill/rb209-nutrient-planning/SKILL.md` remains the fuller guide (for Claude Code / claude.ai and as a versioned release asset); the embedded guidance is a condensed subset kept in sync with it by hand.
+
 Tools are a faithful passthrough to the API with one deliberate exception: the
 recommendation endpoint has a footgun where a missing `field.grass` (which the
 API's validation does not report) makes the call fail with the misleading

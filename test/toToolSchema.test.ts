@@ -92,3 +92,19 @@ describe("buildToolDefs", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 });
+
+describe("tool description guidance", () => {
+  it("enriches the recommendation tool description with the must-know rules", () => {
+    const defs = buildToolDefs(doc);
+    const rec = defs.find((d) => d.name === "rb209_recommendation_recommendations")!;
+    expect(rec.description).toContain("grass");
+    expect(rec.description).toContain("soilAnalyses");
+    expect(rec.description.toLowerCase()).toContain("once");
+  });
+
+  it("leaves ordinary tools' descriptions unguided", () => {
+    const defs = buildToolDefs(doc);
+    const soil = defs.find((d) => d.name === "rb209_soil_soil_types")!;
+    expect(soil.description).not.toContain("soilAnalyses");
+  });
+});

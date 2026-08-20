@@ -21,6 +21,13 @@ async function connect(config: Rb209Config, httpStub: { request: (req: any) => P
 }
 
 describe("createServer", () => {
+  it("exposes the server instructions over the protocol", async () => {
+    const client = await connect(cfg, { request: async () => ({}) });
+    const instructions = client.getInstructions() ?? "";
+    expect(instructions).toContain("RB209 nutrient recommendations");
+    expect(instructions).toContain("soilAnalyses");
+  });
+
   it("lists all 97 tools", async () => {
     const client = await connect(cfg, { request: async () => ({}) });
     const { tools } = await client.listTools();
