@@ -66,10 +66,16 @@ couple of quick messages is fine. Cover:
 **The field & crop**
 - Is this an **arable** crop, a **grass** field, or **grassland**?
 - Which **country**: England & Wales, or Scotland? (affects available options)
-- What **crop** is being grown? For arable also ask the **end use**
-  (e.g. feed vs milling wheat; whether **straw is removed or incorporated**),
-  the **expected yield** (t/ha), and the **sowing/drilling date** and
-  **harvest year**.
+- What **crop** is being grown?
+- For an **arable** crop, always ask these too (they change the recommendation
+  materially — ask up front, don't assume defaults):
+  - **End use** (e.g. wheat/barley Feed vs Milling) → `cropInfo1Id`.
+  - **Straw: removed/baled or incorporated?** → `cropInfo2Id`
+    (`1` = straw baled/removed, `2` = straw incorporated). **This has a large
+    effect on P and especially K** — incorporating straw returns potash to the
+    soil, so K₂O can roughly halve (e.g. 75 → 40 kg/ha in one worked case). Never
+    guess this; ask.
+  - **Expected yield** (t/ha), and the **sowing/drilling date** and **harvest year**.
 - For **grass**: is it cut for silage, grazed, or both? What **target yield**
   (t DM/ha), and roughly what **grass growth class / season**?
 
