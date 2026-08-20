@@ -87,7 +87,10 @@ theirs.
 
 **Always**
 - `rb209_field_countries` → `countryId` (England & Wales = 1, Scotland = 2, All = 3).
-- `rb209_field_field_types_by_country_id` → `fieldType` (arable / grass / grassland).
+- `fieldType` is fixed — you don't need a lookup: **`1` = Arable & Horticulture,
+  `2` = Grassland, `3` = Both**. (If you do call
+  `rb209_field_field_types_by_country_id`, use `countryId` **3** — it returns
+  `T04 No field types found` for 1 or 2.)
 - `rb209_soil_soil_types` → `soilTypeId` (note whether it's a K-releasing clay).
 
 **Arable crop** (`fieldType` = arable)
@@ -131,6 +134,18 @@ path in the tool description):
 
 ## Phase 3 — Assemble the `DataInput`
 
+> **⚠️ The #1 cause of failed calls — read this first.** For an **arable** field
+> you MUST include **both** `field.grass` and `field.grassland` as empty objects
+> (`"grass": {}`, `"grassland": {}`) in addition to your `field.arable` array.
+> The API's validation only complains about `Grassland` being missing — it will
+> **not** tell you `grass` is missing. Instead, if `grass` is absent the call
+> fails at calculation time with the misleading error
+> `422 "Error: occurred while calculating the crop order"`. Do not react to that
+> error by tweaking crop dates, yields, or previous cropping — **add `"grass": {}`**.
+> The single safest approach is to copy `test/fixtures/RecommendationsSampleInput.json`
+> verbatim and change only the values, rather than building the body up from the
+> API's error messages.
+
 Mirror `test/fixtures/RecommendationsSampleInput.json`. The top level is:
 
 ```json
@@ -144,11 +159,15 @@ Mirror `test/fixtures/RecommendationsSampleInput.json`. The top level is:
 
 - **`field.arable` is an ARRAY** of crop objects (one per `cropOrder`) — even
   for a single crop. `field.grass` and `field.grassland` are **objects**.
-- **Include all three crop keys.** The current API build requires `grass`,
-  `grassland`, *and* `arable` to be present. Populate the one that matches the
-  field; pass **`[]`** for `arable` and **`{}`** for `grass`/`grassland` when
-  unused. (The published worked examples predate this and omit `grassland` — if
-  you copy them, add `"grassland": {}`.)
+- **Include all three crop keys — this is the most common failure.** The API
+  requires `arable`, `grass`, *and* `grassland` to all be present. Populate the
+  one that matches the field; pass **`[]`** for `arable` and **`{}`** for
+  `grass`/`grassland` when unused. For a typical **arable** field that means
+  `"grass": {}` **and** `"grassland": {}` are both present as empty objects.
+  Missing `grass` does **not** produce a "Grass required" error — it produces
+  the misleading `422 "…calculating the crop order"`. (The published worked
+  examples predate this and omit `grassland` — if you copy them, add both empty
+  objects.)
 - **Don't populate the wrong crop section.** Putting data in `grass` on an
   arable field errors with "the Grass section can't be populated".
 - **`field.soil.soilAnalyses[]`** uses named per-nutrient fields, **not**
@@ -263,10 +282,12 @@ directly, and they credit against crop need the same way organic materials do:
 Call `rb209_recommendation_recommendations` with `{ "body": <the DataInput> }`.
 
 If you get an **HTTP 400** validation error, it names the field — fix it and
-retry (see *Troubleshooting*). An **HTTP 422** with an `error` string (e.g.
-"occurred while calculating the crop order") means the inputs are structurally
-valid but agronomically inconsistent — re-check the crop section, previous
-cropping, and that only the matching crop sub-object is populated.
+retry (see *Troubleshooting*). An **HTTP 422** `"…calculating the crop order"`
+almost always means **`field.grass` is missing** — add `"grass": {}` (see the
+warning at the top of Phase 3). Only if `grass`/`grassland` are already both
+present should you look at agronomic consistency (crop section matches
+`fieldType`, previous-cropping IDs valid). **Do not loop** re-sending the call
+with tweaked dates/yields — that will not fix a crop-order error.
 
 ---
 
@@ -296,7 +317,10 @@ splits, any "new soil analysis needed" flags).
 
 | Error message (HTTP 400 unless noted) | Fix |
 |---|---|
+| **422** `Error … calculating the crop order` (arable field) | **Almost always `field.grass` is missing.** Add `"grass": {}` (arable fields need BOTH `"grass": {}` and `"grassland": {}`). The API never reports `grass` as missing directly. Don't tweak dates/yields — add the empty `grass` object. |
 | `The Grassland field is required` | Add `"grassland": {}` to `field`. |
+| `When the SnsIndexId value is not populated, the SnsCropOrder value must also not be populated` | In `soilAnalyses[]`, only set `snsCropOrder` when you also set `snsIndexId`. If you have no SNS index, omit all three of `snsIndexId`/`snsMethodologyId`/`snsCropOrder` (or set them to `null`). |
+| `T04 No field types found` from `rb209_field_field_types_by_country_id` with `countryId` 1/2 | Field types are only returned for `countryId` **3** (All). Either call it with `3`, or skip it — the values are fixed: `1` = Arable & Horticulture, `2` = Grassland, `3` = Both. |
 | `$.field.arable … could not be converted to … List` | `field.arable` must be an **array**, e.g. `[ { … } ]`. |
 | `$.field.grass … could not be converted to … Grass` | `field.grass` must be an **object** (`{}` if unused), not an array. |
 | `the Grass section can't be populated` (arable field) | Don't put crop data in `grass` on an arable field — use `"grass": {}`. |
@@ -305,7 +329,7 @@ splits, any "new soil analysis needed" flags).
 | `Field:Arable[0]:CropInfo1Id … missing` (or CropInfo2Id) | Provide `cropInfo1Id` / `cropInfo2Id` on the arable crop (resolve via the CropInfo lookups). |
 | `The PreviousCropTypeId value is missing` | Set `previousCropping.previousCropTypeId` (resolve via the crop-type lookup). |
 | `The ReferenceValue input parameter is not valid` | Keep `referenceValue` plain text — special characters like `+`, `/`, `%` are rejected. Use e.g. `"Cattle slurry example"`. |
-| **422** `Error … calculating the crop order` | Inputs valid but inconsistent — check the crop section matches `fieldType`, only the right sub-object is populated, and previous-cropping IDs are sensible. |
+| **422** `Error … calculating the crop order` (after `grass`/`grassland` are both present) | Now check agronomy: crop section matches `fieldType`, only the matching sub-object is populated, and previous-cropping IDs are valid. |
 | **401** on the call | Auth expired; the server refreshes automatically — just retry once. |
 | **429** rate-limit message | Wait the number of seconds stated, then retry. |
 
