@@ -10,12 +10,19 @@ const find = (path: string, method: "get" | "post" = "get"): Operation =>
 
 describe("toolName", () => {
   it("derives a snake_case name for a simple GET", () => {
-    expect(toolName(find("/api/Soil/SoilTypes"))).toBe("rb209_soil_soil_types");
+    expect(toolName(find("/api/Soil/SoilTypes"))).toBe("rb209_soil_types");
   });
-  it("encodes path params with by_", () => {
-    const op = ops.find((o) => o.path.includes("{") && o.tag === "Arable")!;
-    expect(toolName(op)).toMatch(/^rb209_arable_.*by_/);
+
+  it("collapses a path segment that merely repeats the one before it", () => {
+    expect(toolName(find("/api/OrganicMaterial/OrganicMaterialTypes")))
+      .toBe("rb209_organic_material_types");
   });
+
+  it("omits path params — they live in inputSchema, not the name", () => {
+    expect(toolName(find("/api/Arable/CropTypes/{cropGroupId}")))
+      .toBe("rb209_arable_crop_types");
+  });
+
   it("keeps names within 64 chars and valid", () => {
     for (const o of ops) expect(toolName(o)).toMatch(/^[a-zA-Z0-9_-]{1,64}$/);
   });
@@ -53,10 +60,32 @@ describe("toToolDef", () => {
 });
 
 describe("buildToolDefs", () => {
-  it("produces 97 tools with unique names", () => {
+  it("produces 94 tools with unique names", () => {
     const defs = buildToolDefs(doc);
-    expect(defs.length).toBe(97);
-    expect(new Set(defs.map((d) => d.name)).size).toBe(97);
+    expect(defs.length).toBe(94);
+    expect(new Set(defs.map((d) => d.name)).size).toBe(94);
+  });
+
+  it("drops the internal Users auth operations", () => {
+    const defs = buildToolDefs(doc);
+    expect(defs.some((d) => d.operation.tag === "Users")).toBe(false);
+  });
+
+  it("never truncates a name to a hash suffix", () => {
+    // The old scheme spelled every path param into the name, overflowed 64
+    // chars on 25 of 97 tools, and truncated them to an unreadable SHA slice —
+    // leaving pairs the model could only tell apart by hex.
+    for (const d of buildToolDefs(doc)) {
+      expect(d.name.length).toBeLessThanOrEqual(64);
+      expect(d.name).not.toMatch(/_[0-9a-f]{8}$/);
+    }
+  });
+
+  it("distinguishes sibling endpoints by the params they do not share", () => {
+    const names = buildToolDefs(doc).map((d) => d.name);
+    // /api/Arable/CropTypes and /api/Arable/CropTypes/{cropGroupId}
+    expect(names).toContain("rb209_arable_crop_types");
+    expect(names).toContain("rb209_arable_crop_types_by_group");
   });
 
   it("guarantees unique names even when a naive `_2` suffix would already collide", () => {
@@ -105,7 +134,7 @@ describe("tool description guidance", () => {
 
   it("leaves ordinary tools' descriptions unguided", () => {
     const defs = buildToolDefs(doc);
-    const soil = defs.find((d) => d.name === "rb209_soil_soil_types")!;
+    const soil = defs.find((d) => d.name === "rb209_soil_types")!;
     expect(soil.description).not.toContain("soilAnalyses");
   });
 });

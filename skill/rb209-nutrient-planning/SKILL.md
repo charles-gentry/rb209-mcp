@@ -71,7 +71,7 @@ Keep questions short and grouped; a couple of quick messages is fine. Cover:
 **The field & crop**
 - Is this an **arable** crop, a **grass** field, or **grassland**?
 - Which **country**: England & Wales, or Scotland? (affects available options)
-- **Location** — ask for a **postcode** and call `rb209_rainfall_rainfall_average_by_postcode` to get the average annual rainfall (or take the rainfall in mm if they know it). **Rainfall changes the N recommendation — never invent it.**
+- **Location** — ask for a **postcode** and call `rb209_rainfall_average` to get the average annual rainfall (or take the rainfall in mm if they know it). **Rainfall changes the N recommendation — never invent it.**
 - What **crop** is being grown?
 - For an **arable** crop, always ask these too (they change the recommendation
   materially — ask up front, don't assume defaults):
@@ -120,25 +120,26 @@ theirs.
 - `rb209_field_countries` → `countryId` (England & Wales = 1, Scotland = 2, All = 3).
 - `fieldType` is fixed — you don't need a lookup: **`1` = Arable & Horticulture,
   `2` = Grassland, `3` = Both**. (If you do call
-  `rb209_field_field_types_by_country_id`, use `countryId` **3** — it returns
+  `rb209_field_types`, use `countryId` **3** — it returns
   `T04 No field types found` for 1 or 2.)
-- `rb209_soil_soil_types` → `soilTypeId` (note whether it's a K-releasing clay).
+- `rb209_soil_types` → `soilTypeId` (note whether it's a K-releasing clay).
 
 **Arable crop** (`fieldType` = arable)
 - `rb209_arable_crop_groups` → `cropGroupId`.
-- `rb209_arable_crop_types_by_crop_group_id` (pass the `cropGroupId`) → `cropTypeId`.
-- `rb209_arable_crop_info1s_by_crop_type_id` (pass the `cropTypeId`) → `cropInfo1Id`
+- `rb209_arable_crop_types_by_group` (pass the `cropGroupId`) → `cropTypeId`.
+- `rb209_arable_crop_info1s_by_type` (pass the `cropTypeId`) → `cropInfo1Id`
   (the crop's end use, e.g. Feed / Milling).
 - `rb209_arable_crop_info2s` → `cropInfo2Id` (e.g. straw baled vs incorporated).
 
 **Grass field** (`fieldType` = grass)
 - `rb209_grass_sward_types` → `swardTypeId`.
-- `rb209_grass_sward_managements_by_sward_type_id` → `swardManagementId`.
-- `rb209_grass_defoliation_sequences_by_sward_type_id_by_s_…` → `defoliationSequenceId`
+- `rb209_grass_sward_managements_by_type` → `swardManagementId`.
+- `rb209_grass_defoliation_sequences` → `defoliationSequenceId`
   (the cut/grazing pattern; needs swardType, swardManagement, number of cuts, new-sward flag).
-- `rb209_grass_grass_growth_classes_by_country_id` → `grassGrowthClassId`
-  (or derive it from soil/rainfall/altitude via the `grass_growth_class_by_soil_type_id…` tool).
-- `rb209_grass_grass_seasons_by_country_id` → `seasonId`.
+- `rb209_grass_growth_classes` → `grassGrowthClassId`
+  (or derive it from soil/rainfall/altitude via
+  `rb209_grass_growth_class_by_soil_type_rainfall_altitude_chalk`).
+- `rb209_grass_seasons` → `seasonId`.
 
 **Previous cropping**
 - `rb209_previous_cropping_previous_grasses` → `previousGrassId`.
@@ -146,24 +147,23 @@ theirs.
   same IDs as the arable crop-group/crop-type lookups above.
 
 **NVZ**
-- `rb209_soil_nvz_action_program_by_country_id` → `nvzActionProgrammeId`.
+- `rb209_soil_nvz_action_program` → `nvzActionProgrammeId`.
 
 **Soil analysis → index conversion (ONLY if the user gave analysis values)**
 Skip this entire block when there is no analysis — send `"soilAnalyses": []`
 instead. Only when the user gives a **measured value** that you must convert to
-an index do you need these (names may carry a short hash suffix — match by the
-API path in the tool description):
-- `rb209_soil_methodologies_by_nutrient_id_by_country_id` → methodology IDs per nutrient.
-- `…/Soil/NutrientIndexIdFromValue/{nutrientId}/{methodologyId}/{nutrientValue}/{countryId}`
-  → converts a measured value to an index ID.
+an index do you need these:
+- `rb209_soil_methodologies` → methodology IDs per nutrient.
+- `rb209_soil_nutrient_index_id_from_value` → converts a measured value to an
+  index ID (`nutrientId`, `methodologyId`, `nutrientValue`, `countryId`).
 - If the user already gave an **index** (e.g. "P index 2"), use it directly — no
-  lookup needed. Note: `rb209_soil_nutrient_indexes_by_methodology_id` returns
+  lookup needed. Note: `rb209_soil_nutrient_indexes` returns
   T04 for many nutrient/methodology combinations; prefer the value-conversion
   tool above, and only when you actually have a measured value.
 
 **Organic materials (optional)**
-- `rb209_organic_material_organic_material_categories` → category.
-- `rb209_organic_material_organic_material_types` → `materialId`.
+- `rb209_organic_material_categories` → category.
+- `rb209_organic_material_types` → `materialId`.
 - `rb209_organic_material_incorporation_methods` → `incorporationMethodId`.
 
 **Nutrient IDs** (for reading output): `rb209_field_nutrients`, or use the map in Phase 5.
@@ -288,7 +288,7 @@ For grass, N comes back **per defoliation** (one "Total" row per cut/grazing in
 
 Verified end-to-end; full payload at `test/fixtures/RecommendationsOrganicInput.json`
 (30 m³/ha of 6% cattle slurry on the arable base). Resolve `materialId` from
-`rb209_organic_material_organic_material_types` and `incorporationMethodId` from
+`rb209_organic_material_types` and `incorporationMethodId` from
 `rb209_organic_material_incorporation_methods`:
 
 ```json
@@ -380,8 +380,8 @@ splits, any "new soil analysis needed" flags).
 | **422** `Error … calculating the crop order` (arable field) | **Almost always `field.grass` is missing.** Add `"grass": {}` (arable fields need BOTH `"grass": {}` and `"grassland": {}`). The API never reports `grass` as missing directly. Don't tweak dates/yields — add the empty `grass` object. |
 | `The Grassland field is required` | Add `"grassland": {}` to `field`. |
 | `When the SnsIndexId value is not populated, the SnsCropOrder value must also not be populated` | In `soilAnalyses[]`, only set `snsCropOrder` when you also set `snsIndexId`. If you have no SNS index, omit all three of `snsIndexId`/`snsMethodologyId`/`snsCropOrder` (or set them to `null`). |
-| `T04 No field types found` from `rb209_field_field_types_by_country_id` | Don't call this lookup — `fieldType` is fixed: `1` = Arable & Horticulture, `2` = Grassland, `3` = Both. (It only returns data for `countryId` 3 anyway.) |
-| `T04 No nutrient indexes found` (repeatedly) from a soil index lookup | You're fetching indexes you don't need. If the user has **no analysis**, send `"soilAnalyses": []` and skip all index/methodology lookups. If they gave an **index** directly, use it. Only convert a **measured value** via `…/Soil/NutrientIndexIdFromValue/…`. |
+| `T04 No field types found` from `rb209_field_types` | Don't call this lookup — `fieldType` is fixed: `1` = Arable & Horticulture, `2` = Grassland, `3` = Both. (It only returns data for `countryId` 3 anyway.) |
+| `T04 No nutrient indexes found` (repeatedly) from a soil index lookup | You're fetching indexes you don't need. If the user has **no analysis**, send `"soilAnalyses": []` and skip all index/methodology lookups. If they gave an **index** directly, use it. Only convert a **measured value** via `rb209_soil_nutrient_index_id_from_value`. |
 | `Error … checking the soil data` | `field.soil.soilAnalyses` is missing — include it, using `[]` when there's no analysis. |
 | `$.field.arable … could not be converted to … List` | `field.arable` must be an **array**, e.g. `[ { … } ]`. |
 | `$.field.grass … could not be converted to … Grass` | `field.grass` must be an **object** (`{}` if unused), not an array. |

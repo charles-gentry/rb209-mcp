@@ -1,3 +1,7 @@
+import { fetchWithTimeout } from "./fetchWithTimeout.js";
+
+const AUTH_TIMEOUT_MS = 15_000;
+
 export interface AuthOptions {
   baseUrl: string;
   email: string;
@@ -31,11 +35,16 @@ export class AuthManager {
 
   private async doRefresh(): Promise<string> {
     if (this.refreshToken) {
-      const res = await fetch(`${this.opts.baseUrl}/api/users/refresh_token`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ Email: this.opts.email, RefreshToken: this.refreshToken }),
-      });
+      const res = await fetchWithTimeout(
+        `${this.opts.baseUrl}/api/users/refresh_token`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ Email: this.opts.email, RefreshToken: this.refreshToken }),
+        },
+        AUTH_TIMEOUT_MS,
+        "RB209 token refresh",
+      );
       if (res.ok) {
         return this.store((await res.json()) as TokenPair);
       }
@@ -44,11 +53,16 @@ export class AuthManager {
   }
 
   private async login(): Promise<string> {
-    const res = await fetch(`${this.opts.baseUrl}/api/users/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ Email: this.opts.email, Password: this.opts.password }),
-    });
+    const res = await fetchWithTimeout(
+      `${this.opts.baseUrl}/api/users/login`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ Email: this.opts.email, Password: this.opts.password }),
+      },
+      AUTH_TIMEOUT_MS,
+      "RB209 login",
+    );
     if (!res.ok) {
       const body = await res.text();
       throw new Error(`RB209 login failed: ${res.status} ${body}`);

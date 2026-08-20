@@ -1,8 +1,8 @@
 {
   "manifest_version": "0.3",
   "name": "rb209-mcp",
-  "version": "0.2.4",
-  "description": "AHDB RB209 (Nutrient Management Guide) Web API v2 \u2014 all endpoints as MCP tools.",
+  "version": "0.3.0",
+  "description": "AHDB RB209 (Nutrient Management Guide) Web API v2 — all endpoints as MCP tools.",
   "author": {
     "name": "charles-gentry"
   },
@@ -29,7 +29,7 @@
       "linux"
     ],
     "runtimes": {
-      "node": ">=18.0.0"
+      "node": ">=20.0.0"
     }
   },
   "user_config": {

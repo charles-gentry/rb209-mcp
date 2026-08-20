@@ -1,4 +1,7 @@
 import type { AuthManager } from "./authManager.js";
+import { fetchWithTimeout } from "./fetchWithTimeout.js";
+
+const REQUEST_TIMEOUT_MS = 30_000;
 
 export class RateLimitError extends Error {
   constructor(message: string, readonly retryAfterSeconds: number) {
@@ -53,6 +56,6 @@ export class Rb209Client {
       headers["Content-Type"] = "application/json";
       init.body = JSON.stringify(req.body ?? {});
     }
-    return fetch(url, init);
+    return fetchWithTimeout(url, init, REQUEST_TIMEOUT_MS, `RB209 ${req.path}`);
   }
 }

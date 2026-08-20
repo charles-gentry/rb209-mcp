@@ -4,8 +4,10 @@ import { loadSpec } from "./openapi/loadSpec.js";
 import { buildToolDefs, type ToolDef } from "./openapi/toToolSchema.js";
 import { buildRequest } from "./executor.js";
 import { RateLimitError, type Rb209Client } from "./http/client.js";
+import { TimeoutError } from "./http/fetchWithTimeout.js";
 import type { Rb209Config } from "./config.js";
 import { SERVER_INSTRUCTIONS } from "./serverInstructions.js";
+import { VERSION } from "./version.js";
 
 export function createServer(
   config: Rb209Config,
@@ -20,7 +22,7 @@ export function createServer(
   const byName = new Map(defs.map((d) => [d.name, d]));
 
   const server = new Server(
-    { name: "rb209-mcp", version: "0.2.4" },
+    { name: "rb209-mcp", version: VERSION },
     { capabilities: { tools: {} }, instructions: SERVER_INSTRUCTIONS },
   );
 
@@ -40,9 +42,11 @@ export function createServer(
     try {
       const args = (req.params.arguments ?? {}) as Record<string, unknown>;
       const data = await client.request(buildRequest(def.operation, args));
-      return { content: [{ type: "text", text: JSON.stringify(data, null, 2) }] };
+      // Compact, not pretty-printed: nothing reads this with human eyes, and
+      // indentation costs ~30% more tokens on the large recommendation payloads.
+      return { content: [{ type: "text", text: JSON.stringify(data) }] };
     } catch (e) {
-      const msg = e instanceof RateLimitError
+      const msg = e instanceof RateLimitError || e instanceof TimeoutError
         ? e.message
         : `RB209 request failed: ${(e as Error).message}`;
       return { isError: true, content: [{ type: "text", text: msg }] };

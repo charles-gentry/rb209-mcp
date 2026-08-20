@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Need the annotated tag object, not just the commit, to read its
+          # subject line for the release title.
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npm test
+
+      # The tag must match package.json, or users would download a .mcpb whose
+      # internal version disagrees with the release they took it from.
+      - name: Verify tag matches package.json version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          pkg="$(node -p "require('./package.json').version")"
+          if [ "$tag" != "$pkg" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match package.json version $pkg" >&2
+            exit 1
+          fi
+
+      - run: npm run bundle
+      - name: Publish release with the .mcpb bundle
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Match the existing release convention, e.g.
+          # "v0.2.4 — ask all inputs, no assumptions". The summary comes from
+          # the annotated tag's subject; a lightweight tag just gets the tag.
+          subject="$(git for-each-ref "refs/tags/$GITHUB_REF_NAME" --format='%(contents:subject)')"
+          if [ -n "$subject" ]; then
+            title="$GITHUB_REF_NAME — $subject"
+          else
+            title="$GITHUB_REF_NAME"
+          fi
+          gh release create "$GITHUB_REF_NAME" rb209-mcp.mcpb \
+            --title "$title" --generate-notes
