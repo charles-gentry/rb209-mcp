@@ -100,6 +100,7 @@ describe("tool description guidance", () => {
     expect(rec.description).toContain("grass");
     expect(rec.description).toContain("soilAnalyses");
     expect(rec.description.toLowerCase()).toContain("once");
+    expect(rec.description.toLowerCase()).toContain("rainfall");
   });
 
   it("leaves ordinary tools' descriptions unguided", () => {

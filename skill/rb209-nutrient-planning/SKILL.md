@@ -60,12 +60,18 @@ Phase 5  Read the DataOutput and explain the recommendation to the user
 
 ## Phase 1 — Interview the user
 
-Ask for whatever you don't already have. Keep questions short and grouped; a
-couple of quick messages is fine. Cover:
+**Collect EVERY required input below before you call the recommendation tool,
+and make NO assumptions.** Never silently default a value — not rainfall, not
+sowing date, not yield, not straw handling. If the user doesn't know one, tell
+them the default you propose and get their agreement first. Do not proceed to
+Phase 4 until the *Pre-flight checklist* (end of Phase 3) is fully satisfied.
+
+Keep questions short and grouped; a couple of quick messages is fine. Cover:
 
 **The field & crop**
 - Is this an **arable** crop, a **grass** field, or **grassland**?
 - Which **country**: England & Wales, or Scotland? (affects available options)
+- **Location** — ask for a **postcode** and call `rb209_rainfall_rainfall_average_by_postcode` to get the average annual rainfall (or take the rainfall in mm if they know it). **Rainfall changes the N recommendation — never invent it.**
 - What **crop** is being grown?
 - For an **arable** crop, always ask these too (they change the recommendation
   materially — ask up front, don't assume defaults):
@@ -315,6 +321,21 @@ directly, and they credit against crop need the same way organic materials do:
 ```
 
 ---
+
+### Pre-flight checklist — confirm before calling the tool
+
+Do **not** call `rb209_recommendation_recommendations` until you have, from the
+user (not assumed), every item that applies:
+
+- [ ] country; [ ] rainfall (from postcode lookup or the user); [ ] crop;
+  [ ] end use (`cropInfo1Id`); [ ] straw baled vs incorporated (`cropInfo2Id`);
+  [ ] expected yield; [ ] sowing/drilling date; [ ] harvest year; [ ] soil type;
+  [ ] soil analysis values **or** an explicit "none"; [ ] NVZ status;
+  [ ] previous crop; [ ] any organic manures; [ ] which nutrients.
+
+Set `excessWinterRainfallManuallyEntered: false` and `excessWinterRainfall: 0`
+unless the user gave a specific excess-winter-rainfall figure — the engine
+derives it from rainfall and soil. If any box is unchecked, ask for it first.
 
 ## Phase 4 — Call the engine
 

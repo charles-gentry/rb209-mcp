@@ -11,6 +11,9 @@ import type { Operation } from "./openapi/types.js";
  */
 export const TOOL_GUIDANCE: Record<string, string> = {
   "/api/recommendation/recommendations": [
+    "Before calling, collect ALL inputs from the user — do not assume rainfall,",
+    "sowing date, yield or straw handling; get rainfall from a postcode via",
+    "rb209_rainfall_rainfall_average_by_postcode.",
     "Call this ONCE — it returns every nutrient you enable in `nutrients`",
     "(N, P2O5, K2O, MgO, SO3, lime); do not call it per-nutrient or repeat it.",
     "For an ARABLE field the body MUST include field.grass = {} AND",
