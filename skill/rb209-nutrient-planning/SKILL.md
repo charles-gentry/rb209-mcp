@@ -28,6 +28,23 @@ integer IDs the `DataInput` needs.
 4. **If the API returns a validation error, read it — the field is named.**
    The error tells you exactly what to fix. See *Troubleshooting* for the
    common ones and their fixes.
+5. **Be efficient — a whole recommendation is usually ~6–10 tool calls, not 30.**
+   Avoid these common wasted calls:
+   - **One recommendation call returns _all_ nutrients.** Set every nutrient you
+     want to `true` in the single `nutrients` object and call
+     `rb209_recommendation_recommendations` **once**. Do not call it per nutrient
+     or re-call it to "check" — N, P₂O₅, K₂O, MgO, SO₃ and lime all come back
+     together.
+   - **Don't look `fieldType` up** — it's fixed: `1` = Arable & Horticulture,
+     `2` = Grassland, `3` = Both.
+   - **No soil analysis? Send `"soilAnalyses": []` and skip _all_ soil
+     methodology/index lookups.** The engine applies RB209 default indices; you
+     do not need `rb209_soil_methodologies…`, `rb209_soil_nutrient_index…`, or
+     any index tool. (Those T04 "not found" errors mean you're fetching indexes
+     you don't need.)
+   - **Don't use `rb209_recommendation_calculate_nutrient_offtake` or nutrient
+     target-index tools** for a standard field recommendation — the main
+     recommendation call already does that maths.
 
 ## The process at a glance
 
@@ -59,8 +76,10 @@ couple of quick messages is fine. Cover:
 **The soil**
 - What **soil type** (e.g. medium/sandy loam, clay, sand, peat)?
 - Is there a recent **soil analysis**? If so, capture **pH** and the
-  **P, K and Mg indices** (and the analysis date). If not, say so — the engine
-  falls back to default indices, but the advice is weaker.
+  **P, K and Mg indices** (and the analysis date). **If not, send
+  `"soilAnalyses": []`** — the engine applies default indices, and you should
+  skip all the soil index/methodology lookups entirely (don't fetch indexes you
+  won't use).
 - Is the field in an **NVZ** (Nitrogen Vulnerable Zone)?
 
 **History & inputs**
@@ -114,14 +133,21 @@ theirs.
 - Previous arable crop uses `previousCropGroupId` / `previousCropTypeId` — the
   same IDs as the arable crop-group/crop-type lookups above.
 
-**Soil analysis → index conversion (optional)**
-If the user gives a measured value rather than an index, or you need methodology
-IDs, use the Soil tools (names may carry a short hash suffix — match by the API
-path in the tool description):
+**NVZ**
+- `rb209_soil_nvz_action_program_by_country_id` → `nvzActionProgrammeId`.
+
+**Soil analysis → index conversion (ONLY if the user gave analysis values)**
+Skip this entire block when there is no analysis — send `"soilAnalyses": []`
+instead. Only when the user gives a **measured value** that you must convert to
+an index do you need these (names may carry a short hash suffix — match by the
+API path in the tool description):
 - `rb209_soil_methodologies_by_nutrient_id_by_country_id` → methodology IDs per nutrient.
 - `…/Soil/NutrientIndexIdFromValue/{nutrientId}/{methodologyId}/{nutrientValue}/{countryId}`
   → converts a measured value to an index ID.
-- `rb209_soil_nvz_action_program_by_country_id` → `nvzActionProgrammeId`.
+- If the user already gave an **index** (e.g. "P index 2"), use it directly — no
+  lookup needed. Note: `rb209_soil_nutrient_indexes_by_methodology_id` returns
+  T04 for many nutrient/methodology combinations; prefer the value-conversion
+  tool above, and only when you actually have a measured value.
 
 **Organic materials (optional)**
 - `rb209_organic_material_organic_material_categories` → category.
@@ -174,11 +200,14 @@ Mirror `test/fixtures/RecommendationsSampleInput.json`. The top level is:
   objects.)
 - **Don't populate the wrong crop section.** Putting data in `grass` on an
   arable field errors with "the Grass section can't be populated".
-- **`field.soil.soilAnalyses[]`** uses named per-nutrient fields, **not**
-  `nutrientId`/`index`: `soilAnalysisDate`, `soilPh`, `sulphurDeficient`,
+- **`field.soil.soilAnalyses`** — **no analysis? use `[]`** (an empty array;
+  the key must be present, but omitting the array errors with "checking the soil
+  data"). When you do have analysis, each entry uses named per-nutrient fields,
+  **not** `nutrientId`/`index`: `soilAnalysisDate`, `soilPh`, `sulphurDeficient`,
   `pIndexId`, `pMethodologyId`, `kIndexId`, `kMethodologyId`, `mgIndexId`,
   `mgMethodologyId`, and optionally `snsIndexId` / `snsMethodologyId` /
-  `snsCropOrder`. Every entry needs a `soilAnalysisDate`.
+  `snsCropOrder` (only set `snsCropOrder` when `snsIndexId` is also set). Every
+  entry needs a `soilAnalysisDate`.
 - **`field` also requires:** `fieldType`, `multipleCrops`, `harvestYear`,
   `rainfallAverage`, `excessWinterRainfall`, `excessWinterRainfallManuallyEntered`,
   `mannerManures`, `organicMaterials` (`[]` if none), `mannerOutputs` (`[]` if
@@ -324,7 +353,9 @@ splits, any "new soil analysis needed" flags).
 | **422** `Error … calculating the crop order` (arable field) | **Almost always `field.grass` is missing.** Add `"grass": {}` (arable fields need BOTH `"grass": {}` and `"grassland": {}`). The API never reports `grass` as missing directly. Don't tweak dates/yields — add the empty `grass` object. |
 | `The Grassland field is required` | Add `"grassland": {}` to `field`. |
 | `When the SnsIndexId value is not populated, the SnsCropOrder value must also not be populated` | In `soilAnalyses[]`, only set `snsCropOrder` when you also set `snsIndexId`. If you have no SNS index, omit all three of `snsIndexId`/`snsMethodologyId`/`snsCropOrder` (or set them to `null`). |
-| `T04 No field types found` from `rb209_field_field_types_by_country_id` with `countryId` 1/2 | Field types are only returned for `countryId` **3** (All). Either call it with `3`, or skip it — the values are fixed: `1` = Arable & Horticulture, `2` = Grassland, `3` = Both. |
+| `T04 No field types found` from `rb209_field_field_types_by_country_id` | Don't call this lookup — `fieldType` is fixed: `1` = Arable & Horticulture, `2` = Grassland, `3` = Both. (It only returns data for `countryId` 3 anyway.) |
+| `T04 No nutrient indexes found` (repeatedly) from a soil index lookup | You're fetching indexes you don't need. If the user has **no analysis**, send `"soilAnalyses": []` and skip all index/methodology lookups. If they gave an **index** directly, use it. Only convert a **measured value** via `…/Soil/NutrientIndexIdFromValue/…`. |
+| `Error … checking the soil data` | `field.soil.soilAnalyses` is missing — include it, using `[]` when there's no analysis. |
 | `$.field.arable … could not be converted to … List` | `field.arable` must be an **array**, e.g. `[ { … } ]`. |
 | `$.field.grass … could not be converted to … Grass` | `field.grass` must be an **object** (`{}` if unused), not an array. |
 | `the Grass section can't be populated` (arable field) | Don't put crop data in `grass` on an arable field — use `"grass": {}`. |
