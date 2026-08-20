@@ -145,6 +145,10 @@ path in the tool description):
 > The single safest approach is to copy `test/fixtures/RecommendationsSampleInput.json`
 > verbatim and change only the values, rather than building the body up from the
 > API's error messages.
+>
+> (The rb209-mcp server also auto-fills these empty sections as a safety net, so
+> a forgotten `grass: {}` won't break the call — but include them yourself so the
+> request is explicit.)
 
 Mirror `test/fixtures/RecommendationsSampleInput.json`. The top level is:
 

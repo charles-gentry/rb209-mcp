@@ -1,5 +1,9 @@
 import type { Operation } from "./openapi/types.js";
 import type { Rb209Request } from "./http/client.js";
+import {
+  applyRecommendationDefaults,
+  isRecommendationOp,
+} from "./recommendationGuardrail.js";
 
 export function buildRequest(op: Operation, args: Record<string, unknown>): Rb209Request {
   let path = op.path;
@@ -18,10 +22,10 @@ export function buildRequest(op: Operation, args: Record<string, unknown>): Rb20
     }
   }
 
-  return {
-    method: op.method,
-    path,
-    query,
-    body: hasBody ? args.body : undefined,
-  };
+  let body = hasBody ? args.body : undefined;
+  if (hasBody && isRecommendationOp(op)) {
+    body = applyRecommendationDefaults(body);
+  }
+
+  return { method: op.method, path, query, body };
 }
